@@ -23,4 +23,4 @@ export default function Home() {
       <a href="/tarefas">Ir para tarefas</a>
     </div>
   );
-}w
+}
