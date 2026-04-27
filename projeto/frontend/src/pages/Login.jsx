@@ -10,18 +10,50 @@ export default function Login() {
     const res = await api.login({ usuario, senha });
     const data = await res.json();
 
-    if (res.ok) window.location.href = "/home";
-    else alert(data.erro);
+    if (res.ok) {
+      window.location.href = "/home";
+    } else {
+      alert(data.erro);
+    }
   };
 
   return (
-    <div>
-      <Logo variant="com-slogan" width="280px" />
-      <h2>LOGIN</h2>
-      <input placeholder="Usuário" onChange={e => setUsuario(e.target.value)} />
-      <input type="password" placeholder="Senha" onChange={e => setSenha(e.target.value)} />
-      <button onClick={entrar}>Entrar</button>
-      <p>Paragrafo teste</p>
+    <div className="login-page">
+      <div className="login-header">
+        <Logo variant="com-slogan" width="500px" />
+      </div>
+
+      <div className="login-container">
+        <h1 className="login-title">LOGIN</h1>
+
+        <div className="input-group">
+          <span className="input-icon">👤</span>
+
+          <input
+            className="login-input"
+            type="text"
+            placeholder="CPF ou Usuário"
+            value={usuario}
+            onChange={(e) => setUsuario(e.target.value)}
+          />
+        </div>
+
+        <div className="input-group">
+          <span className="input-icon">🔒</span>
+
+          <input
+            className="login-input"
+            type="password"
+            placeholder="Senha"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
+        </div>
+
+        <button className="login-button" onClick={entrar}>
+          Entrar
+        </button>
+      </div>
     </div>
   );
 }
