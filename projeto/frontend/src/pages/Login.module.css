@@ -26,15 +26,18 @@
 
 .loginTitle {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 3rem;
   letter-spacing: 0.06em;
   color: #ffffff;
   text-align: center;
+  margin-bottom: 6vh;
+  letter-spacing: 1px;
 }
 
 .inputIcon {
-  font-size: 1.1rem;
+  font-size: 20px;
   color: #64748b;
+  margin-right: 5px;
 }
 
 .loginInput {
@@ -47,6 +50,7 @@
   height: 30px;
   border: transparent solid 1px;
   border-radius: 5px;
+  padding-left: 15px;
 }
 
 .loginButton {
@@ -64,8 +68,21 @@
   font-weight: 700;
   cursor: pointer;
   transition: background 0.2s ease;
+  margin-top: 2vh;
 }
 
 .loginButton:hover {
   background: #1d4ed8;
+}
+
+.logincolumn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+  height: 60vh;
+  width: 100vw;
+  margin-bottom: 10vh;
+  background-color: #64748b;
 }

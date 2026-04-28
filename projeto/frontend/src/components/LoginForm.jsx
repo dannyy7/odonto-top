@@ -5,29 +5,29 @@ export default function LoginForm({ usuario, senha, setUsuario, setSenha, onSubm
             <div className={styles.logincolumn}>
                 <h1 className={styles.loginTitle}>LOGIN</h1>
 
+                <div className={styles.inputgroup}>
+                    <span className={styles.inputIcon}>👤</span>
 
-                <span className={styles.inputIcon}>👤</span>
+                    <input
+                        className={styles.loginInput}
+                        type="text"
+                        placeholder="CPF ou Usuário"
+                        value={usuario}
+                        onChange={(e) => setUsuario(e.target.value)}
+                    />
+                </div>
 
-                <input
-                    className={styles.loginInput}
-                    type="text"
-                    placeholder="CPF ou Usuário"
-                    value={usuario}
-                    onChange={(e) => setUsuario(e.target.value)}
-                />
+                <div className={styles.inputgroup}>
+                    <span className={styles.inputIcon}>🔒</span>
 
-
-
-                <span className={styles.inputIcon}>🔒</span>
-
-                <input
-                    className={styles.loginInput}
-                    type="password"
-                    placeholder="Senha"
-                    value={senha}
-                    onChange={(e) => setSenha(e.target.value)}
-                />
-
+                    <input
+                        className={styles.loginInput}
+                        type="password"
+                        placeholder="Senha"
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
+                    />
+                </div>
                 <button className={styles.loginButton} onClick={onSubmit}>
                 Entrar
                 </button>
