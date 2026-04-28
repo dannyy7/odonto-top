@@ -1,4 +1,4 @@
-import './Logo.css';
+import styles from './Logo.module.css';
 import logoSimples from '../assets/logos/logo-simples.png';
 import logoComSlogan from '../assets/logos/logo-com-slogan.png';
 import logoSimplesBranco from '../assets/logos/logo-simples-branco.png';
@@ -15,7 +15,7 @@ export default function Logo({ variant = 'simples', width = '300px' }) {
   const logoSrc = logos[variant] || logoSimples;
 
   return (
-    <div className="logo">
+    <div className={styles.logo}>
       <img src={logoSrc} alt="Odonto Top" style={{ width }} />
     </div>
   );

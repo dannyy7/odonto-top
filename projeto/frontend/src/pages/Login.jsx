@@ -2,6 +2,7 @@ import { useState } from "react";
 import { api } from "../services/api";
 import LoginForm from "../components/LoginForm";
 import styles from "./Login.module.css";
+import Logo from "../components/Logo";
 
 export default function Login() {
   const [usuario, setUsuario] = useState("");
@@ -20,6 +21,9 @@ export default function Login() {
 
   return (
     <div className={styles.loginPage}>
+      <div className={styles.loginHeader}>
+        <Logo variant="com-slogan" width="420px" />
+      </div>
       <LoginForm
         usuario={usuario}
         senha={senha}
