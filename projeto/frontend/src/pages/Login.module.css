@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: #80ff00;
+  background: #ffffff;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
@@ -16,7 +16,7 @@
 .loginContainer {
   width:100vw;
   height: 100vh;
-  background: #ff0000;
+  background: #38c3ff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,21 +36,25 @@
 
 .inputIcon {
   font-size: 20px;
-  color: #64748b;
+  color: #ffffff;
   margin-right: 5px;
 }
 
 .loginInput {
   border: 0;
-  background: rgb(255, 0, 234);
+  background:#d8f9ff;
   outline: none;
   font-size: 1rem;
-  color: #0f172a;
+  color: #5dabcd;
   width: 350px;
   height: 30px;
   border: transparent solid 1px;
   border-radius: 5px;
   padding-left: 15px;
+}
+
+.loginInput::placeholder {
+  color: #5dabcd;
 }
 
 .loginButton {
@@ -62,7 +66,7 @@
   border: 0;
   border-radius: 5px;
   padding: 14px 16px;
-  background: #2563eb;
+  background: #0097b2;
   color: rgb(255, 255, 255);
   font-size: 20px;
   font-weight: 700;
@@ -84,5 +88,4 @@
   height: 60vh;
   width: 100vw;
   margin-bottom: 10vh;
-  background-color: #64748b;
 }
