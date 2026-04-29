@@ -35,7 +35,8 @@
 }
 
 .inputIcon {
-  font-size: 20px;
+  width: 28px;
+  height: 28px;
   color: #ffffff;
   margin-right: 5px;
 }
@@ -56,6 +57,13 @@
 .loginInput::placeholder {
   color: #5dabcd;
 }
+
+.inputgroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 
 .loginButton {
   width: 150px;

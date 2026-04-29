@@ -1,4 +1,7 @@
 
+import perfilImg from '../assets/icones/login/perfil.png';
+import cadeadoImg from '../assets/icones/login/cadedo-fechado.png';
+
 export default function LoginForm({ usuario, senha, setUsuario, setSenha, onSubmit, styles }) {
   return (
         <div className={styles.loginContainer}>
@@ -6,7 +9,7 @@ export default function LoginForm({ usuario, senha, setUsuario, setSenha, onSubm
                 <h1 className={styles.loginTitle}>LOGIN</h1>
 
                 <div className={styles.inputgroup}>
-                    <span className={styles.inputIcon}>👤</span>
+                    <img src={perfilImg} alt="Perfil" className={styles.inputIcon} />
 
                     <input
                         className={styles.loginInput}
@@ -18,7 +21,7 @@ export default function LoginForm({ usuario, senha, setUsuario, setSenha, onSubm
                 </div>
 
                 <div className={styles.inputgroup}>
-                    <span className={styles.inputIcon}>🔒</span>
+                    <img src={cadeadoImg} alt="Cadeado" className={styles.inputIcon} />
 
                     <input
                         className={styles.loginInput}
