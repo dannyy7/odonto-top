@@ -9,13 +9,24 @@ export default function Login() {
   const [senha, setSenha] = useState("");
 
   const entrar = async () => {
-    const res = await api.login({ usuario, senha });
-    const data = await res.json();
+    try {
+      const res = await api.login({
+        usuario,
+        senha
+      });
 
-    if (res.ok) {
-      window.location.href = "/home";
-    } else {
-      alert(data.erro);
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        alert("Login realizado ✅");
+        window.location.href = "/home";
+      } else {
+        alert(data.message || "Erro no login");
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao conectar com o servidor ❌");
     }
   };
 
@@ -24,6 +35,7 @@ export default function Login() {
       <div className={styles.loginHeader}>
         <Logo variant="com-slogan" width="420px" />
       </div>
+
       <LoginForm
         usuario={usuario}
         senha={senha}
