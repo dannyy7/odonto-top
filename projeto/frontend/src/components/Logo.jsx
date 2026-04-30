@@ -4,7 +4,7 @@ import logoComSlogan from '../assets/logos/logo-com-slogan.png';
 import logoSimplesBranco from '../assets/logos/logo-simples-branco.png';
 import logoComSloganBranco from '../assets/logos/logo-com-slogan-branco.png';
 
-export default function Logo({ variant = 'simples', width = '300px' }) {
+export default function Logo({ variant = 'simples', width = '300px', background = true }) {
   const logos = {
     simples: logoSimples,
     'com-slogan': logoComSlogan,
@@ -15,7 +15,10 @@ export default function Logo({ variant = 'simples', width = '300px' }) {
   const logoSrc = logos[variant] || logoSimples;
 
   return (
-    <div className={styles.logo}>
+    <div
+      className={styles.logo}
+      style={{ backgroundColor: background ? "#fff" : "transparent" }}
+    >
       <img src={logoSrc} alt="Odonto Top" style={{ width }} />
     </div>
   );
