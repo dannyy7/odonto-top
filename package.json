@@ -1,18 +1,5 @@
 {
-<<<<<<< HEAD
   "dependencies": {
     "lucide-react": "^1.11.0"
   }
-=======
-  "name": "odonto-top",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
->>>>>>> 5321b1db5956f609fdb5ed848fc58617daba5c67
 }
