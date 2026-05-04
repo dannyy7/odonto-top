@@ -1,0 +1,154 @@
+/* ==============================================
+   TEMA GLOBAL - CORES E FONTES
+   ============================================== */
+
+:root {
+  /* ========== TIPOGRAFIA ========== */
+  --font-sans: system-ui, 'Segoe UI', Roboto, -apple-system, sans-serif;
+  --font-heading: system-ui, 'Segoe UI', Roboto, -apple-system, sans-serif;
+  --font-mono: ui-monospace, Consolas, monospace;
+
+  --font-size-base: 18px;
+  --line-height-base: 145%;
+  --letter-spacing-base: 0.18px;
+
+  /* ========== CORES - TEMA CLARO ========== */
+  --color-text: #6b6375;
+  --color-text-heading: #08060d;
+  --color-bg: #fff;
+  --color-border: #e5e4e7;
+  --color-bg-code: #f4f3ec;
+  --color-lightSkyBlue: #A3E3FF;
+  --color-BrightCyanBlue: #38c3fe;
+  --color-VeryLightCyan: #D8F9FF;
+  --color-TealBlue: #0098b0;
+  --color-SoftSteelBlue: #5DACCD;
+
+  /* Cores da aplicação */
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-secondary: #aa3bff;
+  --color-secondary-bg: rgba(170, 59, 255, 0.1);
+  --color-secondary-border: rgba(170, 59, 255, 0.5);
+  --color-surface: rgba(244, 243, 236, 0.5);
+
+  /* Cores de entrada */
+  --color-input-bg: #f1f5f9;
+  --color-input-border: #e2e8f0;
+  --color-input-icon: #64748b;
+
+  /* ========== SOMBRAS ========== */
+  --shadow-sm: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.08);
+
+  /* ========== RAIOS DE BORDA ========== */
+  --border-radius-sm: 4px;
+  --border-radius-md: 16px;
+  --border-radius-lg: 24px;
+
+  /* ========== ESPAÇAMENTO ========== */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 28px;
+  --spacing-3xl: 32px;
+}
+
+/* ========== TEMA ESCURO ========== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Cores de texto e fundo */
+    --color-text: #9ca3af;
+    --color-text-heading: #f3f4f6;
+    --color-bg: #16171d;
+    --color-border: #2e303a;
+    --color-bg-code: #1f2028;
+
+    /* Cores secundárias para tema escuro */
+    --color-secondary: #c084fc;
+    --color-secondary-bg: rgba(192, 132, 252, 0.15);
+    --color-secondary-border: rgba(192, 132, 252, 0.5);
+    --color-surface: rgba(47, 48, 58, 0.5);
+
+    /* Sombra para tema escuro */
+    --shadow-sm: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+}
+
+/* ========== APLICAR TIPOGRAFIA GLOBAL ========== */
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  letter-spacing: var(--letter-spacing-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  margin: 0;
+  padding: 0;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: light dark;
+}
+
+/* ========== TÍTULOS ========== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-heading);
+  margin: 0;
+}
+
+h1 {
+  font-size: 56px;
+  font-weight: 500;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+}
+
+/* ========== OUTROS ELEMENTOS ========== */
+p {
+  margin: 0;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  border-radius: var(--border-radius-sm);
+  background: var(--color-bg-code);
+  color: var(--color-text-heading);
+  display: inline-flex;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  :root {
+    --font-size-base: 16px;
+  }
+
+  h1 {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}
