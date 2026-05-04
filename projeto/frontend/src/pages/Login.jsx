@@ -1,34 +1,26 @@
 import { useState } from "react";
+import { loginComCPF } from "../services/authService";
 import { api } from "../services/api";
 import LoginForm from "../components/LoginForm";
 import styles from "./Login.module.css";
 import Logo from "../components/Logo";
 
+
 export default function Login() {
-  const [usuario, setUsuario] = useState("");
-  const [senha, setSenha] = useState("");
+    const [usuario, setUsuario] = useState('')
+    const [senha, setSenha] = useState('')
 
-  const entrar = async () => {
-    try {
-      const res = await api.login({
-        usuario,
-        senha
-      });
+    async function handleLogin(e) {
+        e.preventDefault()
+        
+        const res = await loginComCPF(usuario, senha)
 
-      const data = await res.json();
-
-      if (res.ok && data.success) {
-        alert("Login realizado ✅");
-        window.location.href = "/home";
-      } else {
-        alert(data.message || "Erro no login");
-      }
-
-    } catch (error) {
-      console.error(error);
-      alert("Erro ao conectar com o servidor ❌");
+        if (res) {
+             window.location.href = '/home'
+        } else {
+            alert('CPF ou senha inválidos')
+        }
     }
-  };
 
   return (
     <div className={styles.loginPage}>
@@ -41,7 +33,7 @@ export default function Login() {
         senha={senha}
         setUsuario={setUsuario}
         setSenha={setSenha}
-        onSubmit={entrar}
+        onSubmit={handleLogin}
         styles={styles}
       />
     </div>
