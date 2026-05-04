@@ -1,5 +1,8 @@
 import { useState } from "react";
 import styles from "./ModalAdicionarPessoa.module.css";
+//import { api } from "../services/api";
+
+import { supabase } from "../services/supabaseCliente";
 
 export default function ModalAdicionarPessoa({ onClose }) {
   const [form, setForm] = useState({
