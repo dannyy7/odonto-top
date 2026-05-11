@@ -68,6 +68,8 @@ cd frontend
 
 ## Criar o banco de dados
 
+Adicione as tabelas e populacione elas com os arquivos presentes na pasta "Scripts-BD" dentro da pasta de documentacao.
+
 # 4. Como executar o backend
 
 Acesse a pasta do backend:
