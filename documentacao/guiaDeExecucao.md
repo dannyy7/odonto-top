@@ -2,7 +2,18 @@
 
 Este documento descreve o passo a passo para configurar e executar o projeto odonto-top localmente.
 
+## Sobre o Projeto
+
+Este projeto utiliza:
+
+- **Backend:** Node.js com Fastify
+- **Frontend:** (adicione aqui o framework utilizado, ex: React, Vue, etc.)
+- **Banco de Dados:** PostgreSQL
+- **Serviço de Banco:** Supabase
+- **Arquitetura:** MVC (Model-View-Controller)
+
 ---
+
 
 # Pré-requisitos
 
@@ -12,7 +23,6 @@ Antes de começar, verifique se você possui instalado em sua máquina:
 - npm
 - PostgreSQL
 - Supabase
-- Arquitetura MVC
 
 ---
 
