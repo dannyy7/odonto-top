@@ -1,0 +1,15 @@
+.logo {
+  text-align: center;
+  padding: 20px;
+  padding-top: 25px;
+  width: 100%;
+
+  background-color: #2563eb; /* azul */
+}
+
+.logo img {
+  max-width: 110%; /* aumenta um pouco */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}

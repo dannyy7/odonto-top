@@ -31,7 +31,7 @@ export default function Home() {
       
       {/* HEADER */}
       <div className={styles.header}>
-        <Logo variant="simples-branco" width="160px" background={false} />
+        <Logo variant="home" width="160px" background={false} />
 
         <div 
           className={styles.userIcon} 
