@@ -5,6 +5,7 @@ import logoSimples from '../assets/logos/logo-simples.png';
 import logoComSlogan from '../assets/logos/logo-com-slogan.png';
 import logoSimplesBranco from '../assets/logos/logo-simples-branco.png';
 import logoComSloganBranco from '../assets/logos/logo-com-slogan-branco.png';
+import logobranca from '../assets/logos/odonto-top-branco-fundo-transparente.png';
 
 export default function Logo({
   variant = 'simples',
@@ -19,7 +20,7 @@ export default function Logo({
     },
 
     home: {
-      src: logoSimples,
+      src: logobranca,
       styles: homeStyles
     },
 
