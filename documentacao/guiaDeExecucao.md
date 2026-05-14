@@ -32,15 +32,17 @@ Antes de começar, verifique se você possui instalado em sua máquina:
 git clone <https://github.com/dannyy7/odonto-top>
 ```
 
-Acesse a pasta do projeto:
-
-```bash
-cd projeto
-```
 
 # 2. Instalação de dependências
 
-## Backend
+Acesse a pasta do projeto e instale/atualize o npm
+
+```bash
+cd projeto
+npm install
+```
+
+## Frontend
 
 Acesse a pasta do backend:
 
@@ -50,8 +52,6 @@ cd backend
 
 Instale as dependências:
 ```bash
-npm install
-npm init -y
 npm install fastify
 npm install @supabase/supabase-js
 ```
@@ -64,6 +64,12 @@ Acesse a pasta do frontend:
 cd frontend
 ```
 
+
+Instale a dependência:
+```bash
+npm install @supabase/supabase-js
+```
+
 # 3. Configuração do banco de dados
 
 ## Criar o banco de dados
@@ -72,9 +78,9 @@ Adicione as tabelas e populacione elas com os arquivos presentes na pasta "Scrip
 
 # 4. Como executar o backend
 
-Acesse a pasta do backend:
+Acesse a pasta do frontend:
 ```bash
-cd backend
+cd frontend
 ```
 
 Execute o servidor:
@@ -82,7 +88,7 @@ Execute o servidor:
 npm run dev
 ```
 
-O backend estará disponível em:
+O site estará disponível em:
 ```
 http://localhost:3000
 ```
