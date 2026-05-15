@@ -1,4 +1,5 @@
 import styles from "./ModalPerfil.module.css";
+import x from '../assets/icones/home/x.png';
 
 export default function ModalPerfil({ usuario, onClose, onLogout }) {
   if (!usuario) return null;
@@ -8,10 +9,10 @@ export default function ModalPerfil({ usuario, onClose, onLogout }) {
       <div className={styles.modal}>
         
         <button className={styles.close} onClick={onClose}>
-          ✖
+          <img src={x}/>
         </button>
 
-        <h3>{usuario.nome}</h3>
+        <h3  className={styles.nome}>{usuario.nome}</h3>
 
         <p>{usuario.cpf}</p>
         <p>{usuario.email}</p>
