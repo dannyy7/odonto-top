@@ -1,9 +1,12 @@
 .homePage {
   min-height: 100vh;
   width: 100vw;
+
   background: #d8f9ff;
+
   display: flex;
   flex-direction: column;
+
   overflow-x: hidden;
 }
 
@@ -11,15 +14,29 @@
 .header {
   width: 100%;
   height: 70px;
+
   background: #38c3ff;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   padding: 0 60px;
+
   box-sizing: border-box;
+
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
+.header:hover {
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+}
+
+/* USER ICON */
 .userIcon {
   cursor: pointer;
 
@@ -31,11 +48,22 @@
   justify-content: center;
 
   flex-shrink: 0;
+
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.userIcon:hover {
+  transform: scale(1.1) rotate(4deg);
+
+  filter: brightness(1.05);
 }
 
 .userIcon img {
   width: 100%;
   height: 100%;
+
   object-fit: contain;
 }
 
@@ -43,44 +71,105 @@
 .grid {
   display: flex;
   flex-direction: column;
+
   gap: 40px;
+
   padding: 60px;
+
   box-sizing: border-box;
 }
 
 /* CARD */
 .card {
   background: transparent;
-  border-radius: 10px;
+
+  border-radius: 14px;
+
   overflow: hidden;
+
   cursor: pointer;
-  transition: transform 0.2s ease;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
 
   width: 350px;
   max-width: 100%;
 
   height: 250px;
+
+  position: relative;
 }
 
 .card:hover {
-  transform: scale(1.05);
+  transform: translateY(-6px) scale(1.03);
+
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+
+  filter: brightness(1.01);
+}
+
+/* BRILHO NO CARD */
+.card::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 60%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.107),
+    transparent
+  );
+
+  transition: 0.5s ease;
+}
+
+.card:hover::after {
+  left: 130%;
 }
 
 /* PARTE DE CIMA */
 .cardTop {
   background: #a4e3ff;
+
   height: 100px;
+
   border-radius: 10px 10px 0 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: background 0.2s ease;
+}
+
+.card:hover .cardTop {
+  background: #8ddcff;
 }
 
 .cardTop img {
   width: 80px;
   height: 80px;
+
   object-fit: contain;
+
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+.card:hover .cardTop img {
+  transform: scale(1.08) rotate(-2deg);
+
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
 }
 
 /* PARTE DE BAIXO */
@@ -98,22 +187,53 @@
   border-radius: 0 0 10px 10px;
 
   box-sizing: border-box;
+
+  transition: background 0.2s ease;
+}
+
+.card:hover .cardBottom {
+  background: #fafdff;
 }
 
 .cardBottom h3 {
   margin: 0;
+
   color: #0b7c9c;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.card:hover .cardBottom h3 {
+  color: #0097b2;
+
+  transform: translateX(3px);
 }
 
 .cardBottom p {
   margin: 5px 0;
+
   color: #0097b2;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
+.card:hover .cardBottom p {
+  color: #0b7c9c;
+
+  transform: translateX(2px);
+}
+
+/* SEÇÃO */
 .secao {
   display: flex;
   flex-direction: row;
+
   gap: 70px;
+
   align-items: center;
 
   flex-wrap: wrap;
@@ -122,7 +242,14 @@
 /* LOGO */
 .logo {
   display: flex;
+
   height: 40px;
+
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.03);
 }
 
 /* TABLET */
@@ -133,6 +260,7 @@
 
   .secao {
     gap: 30px;
+
     justify-content: center;
   }
 }
@@ -145,11 +273,13 @@
 
   .grid {
     padding: 25px 15px;
+
     gap: 25px;
   }
 
   .secao {
     flex-direction: column;
+
     gap: 25px;
   }
 
