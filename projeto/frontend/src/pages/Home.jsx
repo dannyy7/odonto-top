@@ -67,9 +67,8 @@ export default function Home() {
             </div>
 
             <div className={styles.cardBottom}>
-              <h3>Usuários</h3>
-              <p>Pacientes</p>
-              <p>Funcionários</p>
+              <h3>Agenda</h3>
+              <p>Estado</p>
             </div>
           </div>
 
@@ -79,9 +78,8 @@ export default function Home() {
             </div>
 
             <div className={styles.cardBottom}>
-              <h3>Usuários</h3>
-              <p>Pacientes</p>
-              <p>Funcionários</p>
+              <h3>Tratamentos</h3>
+              <p>Fichas de atendimentos</p>
             </div>
           </div>
         </div>
@@ -92,9 +90,8 @@ export default function Home() {
             </div>
 
             <div className={styles.cardBottom}>
-              <h3>Usuários</h3>
-              <p>Pacientes</p>
-              <p>Funcionários</p>
+              <h3>Modelos de Documentos</h3>
+              <p>Modelos de Doc</p>
             </div>
           </div>
         </div>
