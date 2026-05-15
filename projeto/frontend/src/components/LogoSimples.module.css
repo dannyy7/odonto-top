@@ -1,13 +1,9 @@
-.logo {
-  text-align: center;
-  padding: 15px;
-  padding-top: 20px;
-  width: 100%;
+.logoSimples {
+  padding-top: 5px;
 }
 
-.logo img {
-  max-width: 100%;
+.logoSimples img {
+  width: 160px;
   height: auto;
   display: block;
-  margin: 0 auto;
 }

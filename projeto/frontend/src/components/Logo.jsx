@@ -16,27 +16,37 @@ export default function Logo({
   const logos = {
     simples: {
       src: logoSimples,
-      styles: simplesStyles
+      styles: {
+        logo: simplesStyles.logoSimples
+      }
     },
 
     home: {
       src: logobranca,
-      styles: homeStyles
+      styles: {
+        logo: homeStyles.logoHome
+      }
     },
 
     'com-slogan': {
       src: logoComSlogan,
-      styles: homeStyles
+      styles: {
+        logo: homeStyles.logoHome
+      }
     },
 
     'simples-branco': {
       src: logoSimplesBranco,
-      styles: simplesStyles
+      styles: {
+        logo: simplesStyles.logoSimples
+      }
     },
 
     'com-slogan-branco': {
       src: logoComSloganBranco,
-      styles: homeStyles
+      styles: {
+        logo: homeStyles.logoHome
+      }
     },
   };
 

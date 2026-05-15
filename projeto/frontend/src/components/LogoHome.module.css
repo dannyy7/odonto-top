@@ -1,9 +1,13 @@
-.logo {
-  padding-top: 5px;
+.logoHome {
+  text-align: center;
+  padding: 15px;
+  padding-top: 20px;
+  width: 100%;
 }
 
-.logo img {
-  width: 160px;
+.logoHome img {
+  max-width: 100%;
   height: auto;
   display: block;
+  margin: 0 auto;
 }

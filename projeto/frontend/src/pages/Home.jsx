@@ -8,6 +8,7 @@ import clips from '../assets/icones/home/clips.png';
 import cardiaco from '../assets/icones/home/cardiaco.png';
 import calendario from '../assets/icones/home/calendario.png';
 import ModalPerfil from "../components/ModalPerfil";
+import logobranca from '../assets/logos/odonto-top-branco-fundo-transparente.png';
 
 
 export default function Home() {
@@ -35,8 +36,7 @@ export default function Home() {
       
       {/* HEADER */}
       <div className={styles.header}>
-        <Logo variant="home" width="160px" background={false} />
-
+        <img src={logobranca} alt="OdontoTop" className={styles.logo} />
         <div 
           className={styles.userIcon} 
           onClick={() => setAbrirPerfil(true)}
