@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ModalAdicionarPessoa from "../components/ModalAdicionarPessoa";
 import styles from "./Usuarios.module.css";
+import casa from '../assets/icones/usuario/casa.png'
+import logo from '../assets/logos/odonto-top-branco-fundo-transparente.png'
 
 export default function Usuarios() {
   const [abrirModal, setAbrirModal] = useState(false);
@@ -11,18 +13,17 @@ export default function Usuarios() {
       {/* HEADER */}
       <div className={styles.header}>
         <div className={styles.left}>
-          <span 
+          <button
             className={styles.homeIcon}
             onClick={() => window.location.href = "/home"}
-            style={{ cursor: "pointer" }}
-            >
-            🏠
-            </span>
-          <h2>USUÁRIOS</h2>
+          >
+            <img src={casa} alt="voltar" className={styles.casa} />
+          </button>
+          <h2 className={styles.titulo}>USUÁRIOS</h2>
         </div>
 
-        <div className={styles.right}>
-          <span>🤍 Odonto Top</span>
+        <div>
+          <img src={logo} alt="logo" className={styles.right}/>
         </div>
       </div>
 
@@ -31,10 +32,10 @@ export default function Usuarios() {
         
         {/* MENU LATERAL */}
         <div className={styles.sidebar}>
-          <div>
-            <p>Pacientes</p>
-            <p>Funcionários</p>
-          </div>
+
+            <p className={styles.subtitulo}>Pacientes</p>
+            <p className={styles.subtitulo}>Funcionários</p>
+
 
           <button 
             className={styles.addButton}
