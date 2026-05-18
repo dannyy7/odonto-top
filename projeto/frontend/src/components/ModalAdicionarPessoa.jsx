@@ -99,33 +99,41 @@ export default function ModalAdicionarPessoa({ onClose }) {
 
   return (
     <div className={styles.overlay}>
-      <div className={styles.modal}>
-        <h2>Adicionar Pessoa</h2>
+      <div className={styles.box}>
+        <h2 className={styles.titulo}>Adicionar Pessoa</h2>
+        <div className={styles.modal}>
 
-        <div className={styles.grid}>
-          <input name="nome" placeholder="Nome" onChange={handleChange} />
-          <input name="endereco" placeholder="Endereço" onChange={handleChange} />
-          <input name="cpf" placeholder="CPF" onChange={handleChange} />
-          <input name="telefone" placeholder="Telefone" onChange={handleChange} />
-
-          <input name="email" placeholder="Email" onChange={handleChange} /> {/* 🔥 ESSENCIAL */}
-
-          <input name="senha" type="password" placeholder="Senha" onChange={handleChange} />
-
-          <select name="tipo" onChange={handleChange} defaultValue="">
-            <option value="" disabled>Tipo de Usuário</option>
-            <option value="Dentista">Dentista</option>
-            <option value="Recepcionista">Recepcionista</option>
-            <option value="Auxiliar">Auxiliar</option>
-            <option value="Estagiário">Estagiário</option>
-            <option value="Paciente">Paciente</option>
-            <option value="Funcionario">Funcionario</option>
-          </select>
+          <div className={styles.grid}>
+            <label className={styles.subtitulo}>Nome</label>
+            <input name="nome" onChange={handleChange} className={styles.option} />
+            <label className={styles.subtitulo}>Endereço</label>
+            <input name="endereco" onChange={handleChange} className={styles.option} />
+            <label className={styles.subtitulo}>CPF</label>
+            <input name="cpf" onChange={handleChange} className={styles.option} />
+            <label className={styles.subtitulo}>Telefone</label>
+            <input name="telefone" onChange={handleChange} className={styles.option} />
+          </div>
+          <div className={styles.grid}>
+            <label className={styles.subtitulo}>Email</label>
+            <input name="email" onChange={handleChange} className={styles.option} /> {/* 🔥 ESSENCIAL */}
+            <label className={styles.subtitulo}>Senha</label>
+            <input name="senha" type="password" onChange={handleChange} className={styles.option} />
+            <label className={styles.subtitulo}>Tipo de Usuário</label>
+            <select name="tipo" onChange={handleChange} defaultValue="" className={styles.option}>
+              <option value="" disabled></option>
+              <option value="Dentista">Dentista</option>
+              <option value="Recepcionista">Recepcionista</option>
+              <option value="Auxiliar">Auxiliar</option>
+              <option value="Estagiário">Estagiário</option>
+              <option value="Paciente">Paciente</option>
+              <option value="Funcionario">Funcionario</option>
+            </select>
+          </div>
         </div>
-
+        
         <div className={styles.actions}>
-          <button onClick={onClose}>Cancelar</button>
-          <button onClick={salvar}>Salvar</button>
+          <button onClick={onClose} className={styles.button}>Cancelar</button>
+          <button onClick={salvar} className={`${styles.button} ${styles.self}`}>Salvar</button>
         </div>
       </div>
     </div>
