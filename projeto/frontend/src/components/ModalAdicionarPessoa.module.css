@@ -14,10 +14,11 @@
   background: #ffffff;
   display: flex;
   flex-direction: column;
-  height: 50vh;
+  height: 57vh;
   width: 40vw;
   align-items: start;
-
+  border: transparent;
+  border-radius: 7px;
 }
 
 .modal {
@@ -33,8 +34,7 @@
   display:flex;
   flex-direction: column;
   grid-template-columns: 1fr 1fr;
-  background-color: #0097b2;
-  margin-right: 60px;
+  margin-right: 20px;
   margin-left: 30px;
 }
 .actions {
@@ -59,23 +59,27 @@
   color: #0097b2;
   letter-spacing: 0.1px;
   margin-left: 15px;
-  background-color: blue;
   margin-top: 20px;
+  font-weight: 00;
+  font-size: 20px;
 }
 
 .subtitulo{
   font-weight: 500;
   align-self: flex-start;
+  font-size: 15px;
 }
 
 .button{
   height: 30px;
-  width: 100px;
+  width: 95px;
   border: transparent;
   border-radius: 7px;
   background-color: #5dabcd;
   margin-left: 10px;
   align-self: flex-end;
+  color:white;
+  font-weight: 500;
 }
 .self{
   margin-right: 42px;
