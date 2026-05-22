@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api } from "../services/api";
+import { buscarPerfilLogado } from "../services/authService"; // ✅ importa a nova função
 import styles from "./Home.module.css";
 import Logo from "../components/Logo";
 import perfilImg from '../assets/icones/login/perfil.png';
@@ -9,25 +9,21 @@ import cardiaco from '../assets/icones/home/cardiaco.png';
 import calendario from '../assets/icones/home/calendario.png';
 import ModalPerfil from "../components/ModalPerfil";
 import logobranca from '../assets/logos/odonto-top-branco-fundo-transparente.png';
-
+import { supabase } from "../services/supabaseCliente";
 
 export default function Home() {
   const [abrirPerfil, setAbrirPerfil] = useState(false);
-  const [usuario, setUsuario] = useState({
-    nome: "Manu Metaforando",
-    cpf: "086.155.449-30",
-    email: "debrito.emanu@gmail.com",
-    telefone: "(44) 9 9804-3457"
-  });
+  const [usuario, setUsuario] = useState(null); // ✅ começa vazio, sem dados fixos
 
-  //useEffect(() => {
-    //api.usuario()
-      //.then(res => res.json())
-      //.then(setUsuario);
-  //}, []);
+  // ✅ Busca os dados reais do usuário logado ao carregar a página
+  useEffect(() => {
+    buscarPerfilLogado().then(perfil => {
+      if (perfil) setUsuario(perfil);
+    });
+  }, []);
 
   const sair = async () => {
-    await api.logout();
+    await supabase.auth.signOut();
     window.location.href = "/";
   };
 
@@ -53,7 +49,6 @@ export default function Home() {
             <div className={styles.cardTop}>
               <img src={usuarioazul} alt="Usuários" />
             </div>
-
             <div className={styles.cardBottom}>
               <h3>Usuários</h3>
               <p>Pacientes</p>
@@ -63,9 +58,8 @@ export default function Home() {
 
           <div className={styles.card} onClick={() => window.location.href = "/usuarios"}>
             <div className={styles.cardTop}>
-              <img src={calendario} alt="Usuários" />
+              <img src={calendario} alt="Agenda" />
             </div>
-
             <div className={styles.cardBottom}>
               <h3>Agenda</h3>
               <p>Estado</p>
@@ -74,28 +68,26 @@ export default function Home() {
 
           <div className={styles.card} onClick={() => window.location.href = "/usuarios"}>
             <div className={styles.cardTop}>
-              <img src={cardiaco} alt="Usuários" />
+              <img src={cardiaco} alt="Tratamentos" />
             </div>
-
             <div className={styles.cardBottom}>
               <h3>Tratamentos</h3>
               <p>Fichas de atendimentos</p>
             </div>
           </div>
         </div>
+
         <div className={styles.secao}>
           <div className={styles.card} onClick={() => window.location.href = "/usuarios"}>
             <div className={styles.cardTop}>
-              <img src={clips} alt="Usuários" />
+              <img src={clips} alt="Documentos" />
             </div>
-
             <div className={styles.cardBottom}>
               <h3>Modelos de Documentos</h3>
               <p>Modelos de Doc</p>
             </div>
           </div>
         </div>
-
 
       </div>
 
