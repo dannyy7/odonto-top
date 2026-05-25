@@ -120,19 +120,12 @@
 
 .subtitulo {
   color: #0097b2;
-
   font-size: clamp(16px, 2vw, 23px);
-
   font-weight: bold;
-
   cursor: pointer;
-
-  margin-top: 15px;
-
+  margin-top: 5px;
   margin-bottom: 15px;
-
   margin-left: 10px;
-
   transition: color 0.2s ease;
 }
 
@@ -140,35 +133,34 @@
   color: #007a91;
 }
 
+/*Barra de buscar por nome*/
 .search{
   width: 90%;
-
-  height: 40px;
-
-  border: none;
-
+  height: 30px;
+  background: rgb(255, 255, 255);
+  border: 2px solid #007ea7;
   border-radius: 10px;
-
-  padding-left: 15px;
-
-  margin-top: 10px;
-
+  padding-left: 12px;
+  margin-top: 0px;
   margin-bottom: 15px;
-
-  font-size: 16px;
+  font-size: 15px;
+  outline: none;
+  color: #000000;
+}
+.search:focus{
+  border-color: #005f7a;
+  box-shadow: 0 0 5px rgba(0, 126, 167, 0.4);
 }
 
+/*Barra de rolagem na lista */
 .listaUsuarios{
   width: 100%;
-
-  max-height: 350px;
-
+  max-height: 140px;
   overflow-y: auto;
-
   padding-right: 5px;
 }
 .listaUsuarios::-webkit-scrollbar{
-  width: 8px;
+  width: 7px;
 }
 
 .listaUsuarios::-webkit-scrollbar-track{
@@ -176,24 +168,20 @@
 }
 
 .listaUsuarios::-webkit-scrollbar-thumb{
-  background: #38c3ff;
+  background: rgba(56, 195, 255, 0.45);
 
   border-radius: 10px;
 }
 
 .listaUsuarios::-webkit-scrollbar-thumb:hover{
-  background: #0097b2;
+  background: rgba(0, 151, 178, 0.7);
 }
 
 .nomeUsuario{
   margin-left: 15px;
-
   margin-bottom: 10px;
-
   font-size: 20px;
-
   color: #4f93b4;
-
   cursor: pointer;
 }
 

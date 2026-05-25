@@ -126,7 +126,7 @@ export default function Usuarios() {
 
               <div className={styles.listaUsuarios}>
 
-                {pacientesFiltrados.slice(0, 5).map((usuario) => (
+                {pacientesFiltrados.map((usuario) => (
                   <p
                     key={usuario.userId}
                     className={styles.nomeUsuario}
@@ -163,7 +163,7 @@ export default function Usuarios() {
 
               <div className={styles.listaUsuarios}>
 
-                {funcionariosFiltrados.slice(0, 5).map((usuario) => (
+                {funcionariosFiltrados.map((usuario) => (
                   <p
                     key={usuario.userId}
                     className={styles.nomeUsuario}
