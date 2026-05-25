@@ -252,3 +252,124 @@
 .nomeUsuario:hover {
   color: #007ea7;
 }
+
+/* MAIN */
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 25px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+/* CARD DE EDIÇÃO */
+.editCard {
+  width: min(90%, 1000px);
+  min-width: 300px;
+
+  background: #ececec;
+  border-radius: 20px;
+
+  padding: clamp(20px, 3vw, 40px);
+
+  box-sizing: border-box;
+}
+
+/* TÍTULO */
+.editTitulo {
+  color: #0097b2;
+  text-align: center;
+  margin-bottom: 35px;
+  font-size: clamp(24px, 2vw, 36px);
+}
+
+/* GRID DOS INPUTS */
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+/* LABELS */
+.formGrid label {
+  display: block;
+  color: #8f8f8f;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: clamp(15px, 1vw, 22px);
+}
+
+/* INPUTS */
+.formGrid input,
+.formGrid select {
+  width: 100%;
+  height: clamp(45px, 4vw, 60px);
+
+  border: none;
+  border-radius: 12px;
+
+  background: #cfcfcf;
+  padding: 0 15px;
+  box-sizing: border-box;
+
+  font-size: clamp(14px, 1vw, 18px);
+}
+
+/* BOTÕES */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 35px;
+  gap: 15px;
+}
+
+.salvar,
+.excluir {
+  width: clamp(220px, 30%, 320px);
+  height: clamp(50px, 4vw, 65px);
+
+  border: none;
+  border-radius: 15px;
+
+  color: white;
+  font-size: clamp(18px, 1.2vw, 28px);
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.salvar {
+  background: #1ca8db;
+}
+
+.salvar:hover {
+  background: #1597c8;
+}
+
+.excluir {
+  background: #e11b1b;
+}
+
+.excluir:hover {
+  background: #c71515;
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .buttons {
+    align-items: center;
+  }
+
+  .salvar,
+  .excluir {
+    width: 100%;
+  }
+}

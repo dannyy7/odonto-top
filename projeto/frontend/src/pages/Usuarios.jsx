@@ -24,6 +24,19 @@ export default function Usuarios() {
   const [pesquisaFuncionario, setPesquisaFuncionario] =
     useState("");
 
+    const [usuarioSelecionado, setUsuarioSelecionado] =
+  useState(null);
+
+const [dadosEdicao, setDadosEdicao] =
+  useState({
+    nomePessoa: "",
+    endereco: "",
+    email: "",
+    telefone: "",
+    senha: "",
+    tipo: "",
+  });
+
   // =========================
   // BUSCAR PACIENTES
   // =========================
@@ -85,6 +98,67 @@ export default function Usuarios() {
         )
     );
 
+  function selecionarUsuario(usuario) {
+    setUsuarioSelecionado(usuario);
+
+    setDadosEdicao({
+      nomePessoa: usuario.nomePessoa || "",
+      endereco: usuario.endereco || "",
+      email: usuario.email || "",
+      telefone: usuario.telefone || "",
+      senha: usuario.senha || "",
+      tipo: usuario.tipo || "",
+    });
+  }
+
+  async function editarUsuario() {
+    if (!usuarioSelecionado) return;
+
+    const { error } = await supabase
+      .from("pessoa")
+      .update(dadosEdicao)
+      .eq("userId", usuarioSelecionado.userId);
+
+    if (error) {
+      console.log(error);
+      alert("Erro ao editar usuário");
+      return;
+    }
+
+    alert("Usuário atualizado!");
+  }
+
+  // =========================
+  // EXCLUIR USUÁRIO
+  // =========================
+  async function excluirUsuario() {
+    if (!usuarioSelecionado) return;
+
+    const confirmar = window.confirm(
+      "Deseja excluir este usuário?"
+    );
+
+    if (!confirmar) return;
+
+    const { error } = await supabase
+      .from("pessoa")
+      .delete()
+      .eq("userId", usuarioSelecionado.userId);
+
+    if (error) {
+      console.log(error);
+      alert("Erro ao excluir");
+      return;
+    }
+
+    alert("Usuário excluído");
+
+    setUsuarioSelecionado(null);
+
+    buscarPacientes();
+    buscarFuncionarios();
+  }
+
   return (
     <div className={styles.page}>
       {/* HEADER */}
@@ -135,6 +209,9 @@ export default function Usuarios() {
                   <p
                     key={usuario.userId}
                     className={styles.nomeUsuario}
+                    onClick={() =>
+                      selecionarUsuario(usuario)
+                    }
                   >
                     {usuario.nomePessoa}
                   </p>
@@ -166,6 +243,9 @@ export default function Usuarios() {
                       <p
                         key={usuario.userId}
                         className={styles.nomeUsuario}
+                        onClick={() =>
+                          selecionarUsuario(usuario)
+                        }
                       >
                         {usuario.nomePessoa}
                       </p>
@@ -184,6 +264,9 @@ export default function Usuarios() {
                       <p
                         key={usuario.userId}
                         className={styles.nomeUsuario}
+                        onClick={() =>
+                          selecionarUsuario(usuario)
+                        }
                       >
                         {usuario.nomePessoa}
                       </p>
@@ -202,6 +285,9 @@ export default function Usuarios() {
                       <p
                         key={usuario.userId}
                         className={styles.nomeUsuario}
+                        onClick={() =>
+                          selecionarUsuario(usuario)
+                        }
                       >
                         {usuario.nomePessoa}
                       </p>
@@ -220,6 +306,9 @@ export default function Usuarios() {
                       <p
                         key={usuario.userId}
                         className={styles.nomeUsuario}
+                        onClick={() =>
+                          selecionarUsuario(usuario)
+                        }
                       >
                         {usuario.nomePessoa}
                       </p>
@@ -243,7 +332,135 @@ export default function Usuarios() {
         </div>
 
         {/* ÁREA PRINCIPAL */}
-        <div className={styles.main}></div>
+        <div className={styles.main}>
+
+          {usuarioSelecionado && (
+            <div className={styles.editCard}>
+
+              <h2 className={styles.editTitulo}>
+                Editar usuário
+              </h2>
+
+              <div className={styles.formGrid}>
+                
+                <div>
+                  <label>Nome</label>
+
+                  <input
+                    value={dadosEdicao.nomePessoa}
+                    onChange={(e) =>
+                      setDadosEdicao({
+                        ...dadosEdicao,
+                        nomePessoa:
+                          e.target.value,
+                      })
+                    }
+                  />
+                </div>
+
+                <div>
+                  <label>Senha</label>
+
+                  <input
+                    value={dadosEdicao.senha}
+                    onChange={(e) =>
+                      setDadosEdicao({
+                        ...dadosEdicao,
+                        senha:
+                          e.target.value,
+                      })
+                    }
+                  />
+                </div>
+
+                <div>
+                  <label>Endereço</label>
+
+                  <input
+                    value={dadosEdicao.endereco}
+                    onChange={(e) =>
+                      setDadosEdicao({
+                        ...dadosEdicao,
+                        endereco:
+                          e.target.value,
+                      })
+                    }
+                  />
+                </div>
+
+                <div>
+                  <label>Tipo Usuário</label>
+
+                  <select
+                    value={dadosEdicao.tipo}
+                    onChange={(e) =>
+                      setDadosEdicao({
+                        ...dadosEdicao,
+                        tipo:
+                          e.target.value,
+                      })
+                    }
+                  >
+                    <option>Dentista</option>
+                    <option>Auxiliar</option>
+                    <option>Recepcionista</option>
+                    <option>Estagiário</option>
+                    <option>Paciente</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label>E-mail</label>
+
+                  <input
+                    value={dadosEdicao.email}
+                    onChange={(e) =>
+                      setDadosEdicao({
+                        ...dadosEdicao,
+                        email:
+                          e.target.value,
+                      })
+                    }
+                  />
+                </div>
+
+                <div>
+                  <label>Telefone</label>
+
+                  <input
+                    value={dadosEdicao.telefone}
+                    onChange={(e) =>
+                      setDadosEdicao({
+                        ...dadosEdicao,
+                        telefone:
+                          e.target.value,
+                      })
+                    }
+                  />
+                </div>
+
+              </div>
+
+              <div className={styles.buttons}>
+                <button
+                  className={styles.salvar}
+                  onClick={editarUsuario}
+                >
+                  Confirmar edição
+                </button>
+
+                <button
+                  className={styles.excluir}
+                  onClick={excluirUsuario}
+                >
+                  Excluir usuário
+                </button>
+              </div>
+
+            </div>
+          )}
+
+        </div>
       </div>
 
       {/* MODAL */}

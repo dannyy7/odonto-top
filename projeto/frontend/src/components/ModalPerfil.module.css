@@ -1,97 +1,134 @@
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 70px; /* altura do header */
+  right: 20px;
+
   z-index: 999;
-  padding: 20px;
-  box-sizing: border-box;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+
+  pointer-events: none;
 }
 
 .modal {
-  background: #ffffff;
-  border-radius: 14px;
-  width: 100%;
-  max-width: 420px;
+  background: #a4e3ff;
+  border-radius: 8px;
+  width: 260px;
+  min-height: 170px;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
-  padding: 30px;
+  gap: 14px;
+
+  padding: 22px;
   box-sizing: border-box;
   position: relative;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+
+  pointer-events: auto;
 }
 
+/* Nome */
 .nome {
-  color: #0097b2;
-  font-size: clamp(16px, 4vw, 22px);
-  margin: 0 0 6px 0;
-}
-
-.modal p {
-  color: #a6a6a6;
+  color: #0a6d84;
+  font-size: 18px;
+  font-weight: bold;
   margin: 0;
-  font-size: clamp(13px, 3vw, 15px);
+  padding-right: 30px;
 }
 
+/* Informações */
+.modal p {
+  color: #0a6d84;
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Botão fechar */
 .close {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 12px;
+  right: 12px;
+
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 4px;
+
+  padding: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   transition: transform 0.2s ease;
 }
 
 .close:hover {
-  transform: scale(1.15) rotate(5deg);
+  transform: scale(1.08);
 }
 
 .close img {
-  width: 18px;
-  height: 18px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
 }
 
+/* Botão sair */
 .logout {
-  margin-top: 20px;
+  margin-top: 10px;
   align-self: flex-end;
+
   background: #38c3ff;
   color: white;
   border: none;
   border-radius: 8px;
+
   padding: 8px 22px;
   font-size: 14px;
   font-weight: 600;
+
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .logout:hover {
   background: #0097b2;
-  transform: scale(1.04);
+  transform: scale(1.03);
+}
+
+/* TABLET */
+@media (max-width: 768px) {
+  .overlay {
+    top: 65px;
+    right: 15px;
+  }
+
+  .modal {
+    width: 240px;
+    padding: 18px;
+  }
 }
 
 /* CELULAR */
-@media (max-width: 480px) {
+@media (max-width: 520px) {
+  .overlay {
+    top: 60px;
+    right: 10px;
+    left: 10px;
+  }
+
   .modal {
-    padding: 24px 20px;
-    border-radius: 10px;
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
   }
 
   .logout {
-    align-self: stretch;
+    width: 100%;
     text-align: center;
   }
 }
