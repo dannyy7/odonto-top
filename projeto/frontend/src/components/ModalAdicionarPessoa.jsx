@@ -126,7 +126,6 @@ export default function ModalAdicionarPessoa({ onClose }) {
               <option value="Auxiliar">Auxiliar</option>
               <option value="Estagiário">Estagiário</option>
               <option value="Paciente">Paciente</option>
-              <option value="Funcionario">Funcionario</option>
             </select>
           </div>
         </div>
