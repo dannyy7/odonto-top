@@ -30,3 +30,62 @@ export const obterUsuarioLogado = (req, res) => {
 
   res.json(req.session.usuarioLogado);
 };
+
+export const criarUsuario =
+async (req, res) => {
+
+  try {
+
+    const {
+      email,
+      senha
+    } = req.body;
+
+    const usuario =
+      await UsuarioModel
+      .criarUsuario(
+        email,
+        senha
+      );
+
+    res.status(201).json(usuario);
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(400).json({
+      erro: error.message
+    });
+
+  }
+
+};
+
+export const excluirUsuarioAuth =
+async (req, res) => {
+
+  try {
+
+    const { userId } =
+      req.params;
+
+    await UsuarioModel
+      .excluirUsuario(userId);
+
+    res.json({
+      mensagem:
+        "Usuário removido"
+    });
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(400).json({
+      erro: error.message
+    });
+
+  }
+
+};

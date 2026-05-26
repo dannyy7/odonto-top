@@ -34,14 +34,28 @@ export default function ModalAdicionarPessoa({ onClose }) {
       }
 
       // 1. criar usuário (AUTH)
-      const { data, error } = await supabase.auth.signUp({
-        email: form.email,
-        password: form.senha,
-      });
+      const response = await fetch(
+        "http://localhost:3001/criar-usuario",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+          body: JSON.stringify({
+            email: form.email,
+            senha: form.senha,
+          }),
+        }
+      );
 
-      if (error) {
-        console.error(error);
-        alert("Erro no cadastro ❌");
+      const usuarioCriado = await response.json();
+
+        if (!response.ok) {
+          console.error(usuarioCriado);
+
+         alert("Erro no cadastro ❌");
+
         return;
       }
 
@@ -56,7 +70,7 @@ export default function ModalAdicionarPessoa({ onClose }) {
             email: form.email,
             endereco: form.endereco,
             tipo: form.tipo,
-            userId: data.user.id,
+            userId: usuarioCriado.id,
           },
         ])
         .select();

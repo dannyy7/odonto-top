@@ -33,7 +33,6 @@ const [dadosEdicao, setDadosEdicao] =
     endereco: "",
     email: "",
     telefone: "",
-    senha: "",
     tipo: "",
   });
 
@@ -106,7 +105,7 @@ const [dadosEdicao, setDadosEdicao] =
       endereco: usuario.endereco || "",
       email: usuario.email || "",
       telefone: usuario.telefone || "",
-      senha: usuario.senha || "",
+      //senha: usuario.senha || "",
       tipo: usuario.tipo || "",
     });
   }
@@ -121,43 +120,67 @@ const [dadosEdicao, setDadosEdicao] =
 
     if (error) {
       console.log(error);
+      console.log(error.message)
+      console.log(error.details)
+      console.log(error.hint)
       alert("Erro ao editar usuário");
       return;
     }
 
     alert("Usuário atualizado!");
+    setUsuarioSelecionado(null);
   }
 
   // =========================
   // EXCLUIR USUÁRIO
   // =========================
   async function excluirUsuario() {
-    if (!usuarioSelecionado) return;
 
-    const confirmar = window.confirm(
+  if (!usuarioSelecionado)
+    return;
+
+  const confirmar =
+    window.confirm(
       "Deseja excluir este usuário?"
     );
 
-    if (!confirmar) return;
+  if (!confirmar) return;
 
-    const { error } = await supabase
+  // REMOVE DO AUTH
+  await fetch(
+    `http://localhost:3001/excluir-usuario/${usuarioSelecionado.userId}`,
+    {
+      method: "DELETE",
+    }
+  );
+
+  // REMOVE DA TABELA PESSOA
+  const { error } =
+    await supabase
       .from("pessoa")
       .delete()
-      .eq("userId", usuarioSelecionado.userId);
+      .eq(
+        "userId",
+        usuarioSelecionado.userId
+      );
 
-    if (error) {
-      console.log(error);
-      alert("Erro ao excluir");
-      return;
-    }
+  if (error) {
+    console.log(error);
 
-    alert("Usuário excluído");
+    alert(
+      "Erro ao excluir"
+    );
 
-    setUsuarioSelecionado(null);
-
-    buscarPacientes();
-    buscarFuncionarios();
+    return;
   }
+
+  alert("Usuário excluído");
+
+  setUsuarioSelecionado(null);
+
+  buscarPacientes();
+  buscarFuncionarios();
+}
 
   return (
     <div className={styles.page}>
@@ -358,7 +381,7 @@ const [dadosEdicao, setDadosEdicao] =
                   />
                 </div>
 
-                <div>
+                {/*<div>
                   <label>Senha</label>
 
                   <input
@@ -371,7 +394,7 @@ const [dadosEdicao, setDadosEdicao] =
                       })
                     }
                   />
-                </div>
+                </div>*/}
 
                 <div>
                   <label>Endereço</label>
