@@ -54,6 +54,7 @@ Instale as dependências:
 ```bash
 npm install fastify
 npm install @supabase/supabase-js
+npm instal dotenv
 ```
 
 ## Frontend
@@ -75,6 +76,12 @@ npm install @supabase/supabase-js
 ## Criar o banco de dados
 
 Adicione as tabelas e populacione elas com os arquivos presentes na pasta "Scripts-BD" dentro da pasta de documentacao.
+
+.env do backend 
+SUPABASE_URL=https://vrpoqxpqwcefhmkejfah.supabase.co
+
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZycG9xeHBxd2NlZmhta2VqZmFoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3Nzg0MTU3NiwiZXhwIjoyMDkzNDE3NTc2fQ.rPGWfizRgCzGBj6wD9B0H6TLlVf0yxrZY0QT2ZIgWLg
+
 
 # 4. Como executar o backend
 
