@@ -15,11 +15,9 @@ class UsuarioModel {
   static async buscarPorUsuario(
     usuario
   ) {
-
     return listaUsuarios.find(
       u => u.usuario === usuario
     );
-
   }
 
   static async criarUsuario(
