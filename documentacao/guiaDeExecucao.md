@@ -100,3 +100,14 @@ O site estará disponível em:
 http://localhost:3000
 ```
 
+# Fazer Commit
+
+Selecionar develop ao invés de main no GitHUb Desktop
+
+No terminal: 
+
+git checkout -b nome-da-sua-branch
+
+git add .
+
+git commit -m "sua mensagem"
