@@ -56,15 +56,20 @@ export default function Home() {
             </div>
           </div>
 
-          <div className={styles.card} onClick={() => window.location.href = "/usuarios"}>
-            <div className={styles.cardTop}>
-              <img src={calendario} alt="Agenda" />
-            </div>
-            <div className={styles.cardBottom}>
-              <h3>Agenda</h3>
-              <p>Estado</p>
-            </div>
-          </div>
+  <div
+  className={styles.card}
+onClick={() => {
+  window.location.href = "/agenda";
+}}>
+  <div className={styles.cardTop}>
+    <img src={calendario} alt="Agenda" />
+  </div>
+
+  <div className={styles.cardBottom}>
+    <h3>Agenda</h3>
+    <p>Estado</p>
+  </div>
+</div>
 
           <div className={styles.card} onClick={() => window.location.href = "/usuarios"}>
             <div className={styles.cardTop}>

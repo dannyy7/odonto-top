@@ -34,6 +34,7 @@ const [dadosEdicao, setDadosEdicao] =
     email: "",
     telefone: "",
     tipo: "",
+    ativo: true, 
   });
 
   // =========================
@@ -107,6 +108,51 @@ const [dadosEdicao, setDadosEdicao] =
       telefone: usuario.telefone || "",
       //senha: usuario.senha || "",
       tipo: usuario.tipo || "",
+      ativo: usuario.ativo ?? true, 
+    });
+  }
+
+  // =========================
+  // NOME + STATUS (texto)
+  // =========================
+function renderNomeComStatus(usuario) {
+  const ativo = usuario.ativo ?? true;
+
+  return (
+    <div
+      key={usuario.userId}
+      onClick={() => selecionarUsuario(usuario)}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        marginLeft: "20px",
+        marginBottom: "8px",
+        cursor: "pointer",
+      }}
+    >
+      <div
+        style={{
+          width: "10px",
+          height: "10px",
+          borderRadius: "50%",
+          background: ativo ? "green" : "red",
+          flexShrink: 0,
+        }}
+      ></div>
+
+      <span>{usuario.nomePessoa}</span>
+    </div>
+  );
+}
+
+  // =========================
+  // ALTERNAR STATUS ATIVO/INATIVO
+  // =========================
+  function toggleAtivo() {
+    setDadosEdicao({
+      ...dadosEdicao,
+      ativo: !dadosEdicao.ativo,
     });
   }
 
@@ -228,17 +274,9 @@ const [dadosEdicao, setDadosEdicao] =
 
             {mostrarPacientes && (
               <div className={styles.listaUsuarios}>
-                {pacientesFiltrados.map((usuario) => (
-                  <p
-                    key={usuario.userId}
-                    className={styles.nomeUsuario}
-                    onClick={() =>
-                      selecionarUsuario(usuario)
-                    }
-                  >
-                    {usuario.nomePessoa}
-                  </p>
-                ))}
+                {pacientesFiltrados.map((usuario) =>
+                  renderNomeComStatus(usuario)
+                )}
               </div>
             )}
           </div>
@@ -262,17 +300,9 @@ const [dadosEdicao, setDadosEdicao] =
                   </p>
 
                   {funcionariosFiltrados.map((usuario) =>
-                    usuario.tipo === "Estagiário" ? (
-                      <p
-                        key={usuario.userId}
-                        className={styles.nomeUsuario}
-                        onClick={() =>
-                          selecionarUsuario(usuario)
-                        }
-                      >
-                        {usuario.nomePessoa}
-                      </p>
-                    ) : null
+                    usuario.tipo === "Estagiário"
+                      ? renderNomeComStatus(usuario)
+                      : null
                   )}
                 </div>
 
@@ -283,17 +313,9 @@ const [dadosEdicao, setDadosEdicao] =
                   </p>
 
                   {funcionariosFiltrados.map((usuario) =>
-                    usuario.tipo === "Auxiliar" ? (
-                      <p
-                        key={usuario.userId}
-                        className={styles.nomeUsuario}
-                        onClick={() =>
-                          selecionarUsuario(usuario)
-                        }
-                      >
-                        {usuario.nomePessoa}
-                      </p>
-                    ) : null
+                    usuario.tipo === "Auxiliar"
+                      ? renderNomeComStatus(usuario)
+                      : null
                   )}
                 </div>
 
@@ -304,17 +326,9 @@ const [dadosEdicao, setDadosEdicao] =
                   </p>
 
                   {funcionariosFiltrados.map((usuario) =>
-                    usuario.tipo === "Recepcionista" ? (
-                      <p
-                        key={usuario.userId}
-                        className={styles.nomeUsuario}
-                        onClick={() =>
-                          selecionarUsuario(usuario)
-                        }
-                      >
-                        {usuario.nomePessoa}
-                      </p>
-                    ) : null
+                    usuario.tipo === "Recepcionista"
+                      ? renderNomeComStatus(usuario)
+                      : null
                   )}
                 </div>
 
@@ -325,17 +339,9 @@ const [dadosEdicao, setDadosEdicao] =
                   </p>
 
                   {funcionariosFiltrados.map((usuario) =>
-                    usuario.tipo === "Dentista" ? (
-                      <p
-                        key={usuario.userId}
-                        className={styles.nomeUsuario}
-                        onClick={() =>
-                          selecionarUsuario(usuario)
-                        }
-                      >
-                        {usuario.nomePessoa}
-                      </p>
-                    ) : null
+                    usuario.tipo === "Dentista"
+                      ? renderNomeComStatus(usuario)
+                      : null
                   )}
                 </div>
 
@@ -360,9 +366,23 @@ const [dadosEdicao, setDadosEdicao] =
           {usuarioSelecionado && (
             <div className={styles.editCard}>
 
-              <h2 className={styles.editTitulo}>
-                Editar usuário
-              </h2>
+              <div className={styles.editHeader}>
+                <h2 className={styles.editTitulo}>
+                  Editar usuário
+                </h2>
+
+                <button
+                  className={`${styles.statusBtn} ${
+                    dadosEdicao.ativo
+                      ? styles.ativo
+                      : styles.inativo
+                  }`}
+                  onClick={toggleAtivo}
+                  type="button"
+                >
+                  {dadosEdicao.ativo ? "Ativo" : "Inativo"}
+                </button>
+              </div>
 
               <div className={styles.formGrid}>
                 

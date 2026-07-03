@@ -12,7 +12,17 @@ export default function ModalPerfil({ usuario, onClose, onLogout }) {
           <img src={x}/>
         </button>
 
-        <h3  className={styles.nome}>{usuario.nome}</h3>
+      <div className={styles.usuarioInfo}>
+  <span
+    className={`${styles.statusBolinha} ${
+      (usuario.ativo ?? true)
+        ? styles.statusAtivo
+        : styles.statusInativo
+    }`}
+  ></span>
+
+  <h3 className={styles.nome}>{usuario.nome}</h3>
+</div>
 
         <p>{usuario.cpf}</p>
         <p>{usuario.email}</p>

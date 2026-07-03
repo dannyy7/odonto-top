@@ -1,0 +1,173 @@
+.page{
+    width:100vw;
+    height:100vh;
+    background:#a4e3ff;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.header{
+
+    height:70px;
+    background:#38c3ff;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 20px;
+}
+
+.left{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.homeIcon{
+
+    all:unset;
+    cursor:pointer;
+}
+
+.casa{
+
+    width:35px;
+}
+
+.logo{
+
+    height:38px;
+}
+
+.titulo{
+
+    color:white;
+    font-size:35px;
+}
+
+.main{
+
+    flex:1;
+
+    display:flex;
+    justify-content:center;
+
+    padding:25px;
+}
+
+.card{
+
+    width:95%;
+    background:#bfeeff;
+
+    border-radius:8px;
+
+    padding:25px;
+}
+
+.card h2{
+
+    color:#4d7180;
+    font-size:45px;
+}
+
+.topoCalendario{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.topoCalendario h2{
+    margin:0;
+    color:#557482;
+    font-size:42px;
+}
+
+.setas{
+    display:flex;
+    gap:10px;
+}
+
+.setas button{
+
+    width:45px;
+    height:45px;
+
+    border:none;
+    background:transparent;
+
+    font-size:34px;
+    color:#557482;
+
+    cursor:pointer;
+}
+
+.calendario{
+
+    width:100%;
+    height:450px;
+
+    background:white;
+
+    border:2px solid #9cc2ce;
+
+}
+
+.diasSemana{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    text-align:center;
+    font-weight:bold;
+    color:#5a7c8a;
+    margin-bottom:10px;
+}
+
+.gridDias{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:8px;
+}
+
+.dia{
+    height:70px;
+    background:#e9f7fb;
+    border:1px solid #b7d6e2;
+    border-radius:8px;
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-weight:bold;
+    color:#4d6f7d;
+}
+
+.bolinha{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+
+    background:#27ae60;
+
+    position:absolute;
+    bottom:6px;
+    right:6px;
+}
+
+.diaVazio{
+  height: 70px;
+  background: transparent;
+}
+
+.gridDias{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:8px;
+  align-items:stretch;
+}
