@@ -157,25 +157,96 @@ function renderNomeComStatus(usuario) {
   }
 
   async function editarUsuario() {
-    if (!usuarioSelecionado) return;
+  if (!usuarioSelecionado) return;
 
-    const { error } = await supabase
-      .from("pessoa")
-      .update(dadosEdicao)
-      .eq("userId", usuarioSelecionado.userId);
+  const tipoAntigo = usuarioSelecionado.tipo;
+  const tipoNovo = dadosEdicao.tipo;
 
-    if (error) {
-      console.log(error);
-      console.log(error.message)
-      console.log(error.details)
-      console.log(error.hint)
-      alert("Erro ao editar usuário");
-      return;
-    }
+  // Atualiza a tabela pessoa
+  const { error } = await supabase
+    .from("pessoa")
+    .update({
+      nomePessoa: dadosEdicao.nomePessoa,
+      endereco: dadosEdicao.endereco,
+      email: dadosEdicao.email,
+      telefone: dadosEdicao.telefone,
+      tipo: tipoNovo,
+    })
+    .eq("idPessoa", usuarioSelecionado.idPessoa);
 
-    alert("Usuário atualizado!");
-    setUsuarioSelecionado(null);
+  if (error) {
+    console.log(error);
+    alert("Erro ao editar usuário");
+    return;
   }
+
+  // PACIENTE -> FUNCIONÁRIO
+  if (tipoAntigo === "Paciente" && tipoNovo !== "Paciente") {
+
+    await supabase
+      .from("paciente")
+      .delete()
+      .eq("idPessoaPaciente", usuarioSelecionado.idPessoa);
+
+    const { data, error } = await supabase
+    .from("cargo")
+    .select("*");
+
+  console.log("CARGOS:", data);
+  console.log("ERRO:", error);
+
+    await supabase
+      .from("funcionario")
+      .insert({
+        idPessoaFuncionario: usuarioSelecionado.idPessoa,
+        idCargoFuncionario: cargo.idCargo,
+      });
+  }
+
+  // FUNCIONÁRIO -> PACIENTE
+  else if (tipoAntigo !== "Paciente" && tipoNovo === "Paciente") {
+
+    await supabase
+      .from("funcionario")
+      .delete()
+      .eq("idPessoaFuncionario", usuarioSelecionado.idPessoa);
+
+    await supabase
+      .from("paciente")
+      .insert({
+        idPessoaPaciente: usuarioSelecionado.idPessoa,
+        dataCadastro: new Date(),
+      });
+  }
+
+  // FUNCIONÁRIO -> FUNCIONÁRIO (troca de cargo)
+  else if (
+    tipoAntigo !== "Paciente" &&
+    tipoNovo !== "Paciente" &&
+    tipoAntigo !== tipoNovo
+  ) {
+
+    const { data: cargo } = await supabase
+      .from("cargo")
+      .select("idCargo")
+      .eq("nomeCargo", tipoNovo)
+      .single();
+
+    await supabase
+      .from("funcionario")
+      .update({
+        idCargoFuncionario: cargo.idCargo,
+      })
+      .eq("idPessoaFuncionario", usuarioSelecionado.idPessoa);
+  }
+
+  alert("Usuário atualizado!");
+
+  buscarPacientes();
+  buscarFuncionarios();
+
+  setUsuarioSelecionado(null);
+}
 
   // =========================
   // EXCLUIR USUÁRIO
