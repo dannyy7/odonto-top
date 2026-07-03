@@ -90,10 +90,62 @@ export default function ModalAdicionarPessoa({ onClose }) {
 //        alert("Erro ao cadastrar ❌");
 
       // 3. salvar na tabela específica
+    //if (form.tipo === "Paciente") {
+    //   await supabase.from("paciente").insert([
+    //      { idPessoa }
+    //    ]);
+    //  }
+
+    // PACIENTE
       if (form.tipo === "Paciente") {
-        await supabase.from("paciente").insert([
-          { idPessoa }
-        ]);
+
+        const { error } = await supabase
+          .from("paciente")
+          .insert([
+            {
+              idPessoaPaciente: idPessoa,
+              dataCadastro: new Date(),
+              planoDeSaude: null,
+              observacoes: null
+            }
+          ]);
+
+        if (error) {
+          console.log(error);
+        }
+      }
+
+      // FUNCIONÁRIOS
+      else {
+
+        // procura o cargo escolhido
+        const { data: cargo, error: erroCargo } =
+          await supabase
+            .from("cargo")
+            .select("idCargo")
+            .eq("nomeCargo", form.tipo)
+            .single();
+
+        if (erroCargo) {
+          console.log(erroCargo);
+          alert("Cargo não encontrado.");
+          return;
+        }
+
+        const { error } = await supabase
+          .from("funcionario")
+          .insert([
+            {
+              idPessoaFuncionario: idPessoa,
+              idCargoFuncionario: cargo.idCargo
+            }
+          ]);
+
+        if (error) {
+          console.log(error);
+          alert("Erro ao cadastrar funcionário.");
+          return;
+        }
       }
 
       if (form.tipo === "Funcionario") {
