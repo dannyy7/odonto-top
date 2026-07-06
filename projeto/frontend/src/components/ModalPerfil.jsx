@@ -23,10 +23,11 @@ export default function ModalPerfil({ usuario, onClose, onLogout }) {
 
   <h3 className={styles.nome}>{usuario.nome}</h3>
 </div>
-
-        <p>{usuario.cpf}</p>
-        <p>{usuario.email}</p>
-        <p>{usuario.telefone}</p>
+      <div className={styles.infoContainer}>
+        <p className={styles.info}>{usuario.cpf}</p>
+        <p className={styles.info}>{usuario.email}</p>
+        <p className={styles.info}>{usuario.telefone}</p>
+      </div>
 
         <button className={styles.logout} onClick={onLogout}>
           Sair

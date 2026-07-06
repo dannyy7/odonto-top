@@ -23,6 +23,9 @@
   border-radius: 10px;
   overflow-y: auto;
   box-sizing: border-box;
+
+  /* Animação */
+  animation: descerModal 0.4s cubic-bezier(.22, 1, .36, 1);
 }
 
 .titulo {
@@ -103,6 +106,24 @@
 .button:hover {
   background-color: #0097b2;
   transform: scale(1.03);
+}
+
+/* Animação do modal */
+@keyframes descerModal {
+  0% {
+    opacity: 0;
+    transform: translateY(-45px) scale(0.96);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(6px) scale(1.01);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* CELULAR */
