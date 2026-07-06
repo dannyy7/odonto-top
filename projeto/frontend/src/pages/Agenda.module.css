@@ -1,173 +1,241 @@
-.page{
-    width:100vw;
-    height:100vh;
-    background:#a4e3ff;
-
-    display:flex;
-    flex-direction:column;
+.page {
+    width: 100vw;
+    height: 100vh;
+    background: #a4e3ff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Evita qualquer barra de rolagem na tela */
 }
 
-.header{
-
-    height:70px;
-    background:#38c3ff;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    padding:0 20px;
+.header {
+    height: 70px;
+    background: #38c3ff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 }
 
-.left{
-
-    display:flex;
-    align-items:center;
-    gap:10px;
+.left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.homeIcon{
-
-    all:unset;
-    cursor:pointer;
+.homeIcon {
+    all: unset;
+    cursor: pointer;
 }
 
-.casa{
-
-    width:35px;
+.casa {
+    width: 35px;
 }
 
-.logo{
-
-    height:38px;
+.logo {
+    height: 38px;
 }
 
-.titulo{
-
-    color:white;
-    font-size:35px;
+.titulo {
+    color: white;
+    font-size: 35px;
 }
 
-.main{
-
-    flex:1;
-
-    display:flex;
-    justify-content:center;
-
-    padding:25px;
+.main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 25px;
+    box-sizing: border-box;
 }
 
-.card{
-
-    width:95%;
-    background:#bfeeff;
-
-    border-radius:8px;
-
-    padding:25px;
+/* O CARD AZUL - ELE ENGLOBA E FECHA TUDO DENTRO DELE */
+.card {
+    width: 95%;
+    background: #bfeeff;
+    border-radius: 8px;
+    padding: 25px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribui o topo, o calendário e a pesquisa perfeitamente */
+    height: 100%; /* Faz ele ocupar todo o espaço do main */
 }
 
-.card h2{
-
-    color:#4d7180;
-    font-size:45px;
+.topoCalendario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.topoCalendario{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
+.topoCalendario h2 {
+    margin: 0;
+    color: #557482;
+    font-size: 42px;
+    text-transform: capitalize;
 }
 
-.topoCalendario h2{
-    margin:0;
-    color:#557482;
-    font-size:42px;
+.setas {
+    display: flex;
+    gap: 10px;
 }
 
-.setas{
-    display:flex;
-    gap:10px;
+.setas button {
+    width: 45px;
+    height: 45px;
+    border: none;
+    background: transparent;
+    font-size: 34px;
+    color: #557482;
+    cursor: pointer;
 }
 
-.setas button{
-
-    width:45px;
-    height:45px;
-
-    border:none;
-    background:transparent;
-
-    font-size:34px;
-    color:#557482;
-
-    cursor:pointer;
+/* O BLOCO BRANCO DO CALENDÁRIO */
+.calendario {
+    width: 100%;
+    flex: 1; /* Faz o calendário crescer dinamicamente ocupando o centro */
+    margin: 15px 0;
+    background: white;
+    border: 2px solid #9cc2ce;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    box-sizing: border-box;
 }
 
-.calendario{
-
-    width:100%;
-    height:450px;
-
-    background:white;
-
-    border:2px solid #9cc2ce;
-
+.diasSemana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    color: #5a7c8a;
+    margin-bottom: 10px;
 }
 
-.diasSemana{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    text-align:center;
-    font-weight:bold;
-    color:#5a7c8a;
-    margin-bottom:10px;
+.gridDias {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr); /* Divide as linhas da semana por igual */
+    gap: 8px;
+    flex: 1;
 }
 
-.gridDias{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:8px;
+.dia {
+    background: #e9f7fb;
+    border: 1px solid #b7d6e2;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #4d6f7d;
 }
 
-.dia{
-    height:70px;
-    background:#e9f7fb;
-    border:1px solid #b7d6e2;
-    border-radius:8px;
-
-    position:relative;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-weight:bold;
-    color:#4d6f7d;
+.diaVazio {
+    background: transparent;
 }
 
-.bolinha{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-
-    background:#27ae60;
-
-    position:absolute;
-    bottom:6px;
-    right:6px;
+.bolinha {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #27ae60;
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
 }
 
-.diaVazio{
-  height: 70px;
-  background: transparent;
+/* AREA DE PESQUISA ALINHADA NA BASE DO CARD AZUL */
+.containerPesquisa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
 }
 
-.gridDias{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:8px;
-  align-items:stretch;
+.containerPesquisa h3 {
+    color: #4d7180;
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.barraPesquisa {
+    display: flex;
+    align-items: center;
+    background: #cfcfcf;
+    border-radius: 25px;
+    padding: 0 15px;
+    width: 300px;
+    border: 1px solid #b5b5b5;
+}
+
+.barraPesquisa input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    height: 38px;
+    font-size: 16px;
+    outline: none;
+    color: #333;
+}
+
+.btnPesquisa {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #557482;
+}
+
+.diaAtivo {
+    border: 3px solid #38c3ff !important;
+    background: #ffffff !important;
+}
+
+/* NOVAS CLASSES PARA A LISTA DE MEDICOS/CONSULTAS */
+
+.secaoInferior {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.containerLista {
+    max-height: 120px; /* Limita o tamanho para não estourar o card azul */
+    overflow-y: auto;  /* Permite rolar caso tenha muitas consultas no dia */
+    padding-left: 5px;
+}
+
+.listaConsultas {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.listaConsultas li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #0a6d84; /* Cor azul escura padrão do seu sistema */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.pontoConsulta {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #38c3ff; /* Cor azul clara das bolinhas do mockup original */
+    flex-shrink: 0;
+}
+
+.semConsulta {
+    color: #557482;
+    margin: 0;
+    font-size: 16px;
+    font-style: italic;
 }
