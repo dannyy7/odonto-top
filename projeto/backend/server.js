@@ -1,5 +1,6 @@
 import express from 'express';
 import usuarioRoutes from "./routes/usuario.routes.js";
+import agendaRoutes from "./routes/agenda.routes.js"
 //import mysql from 'mysql2'
 import dotenv from "dotenv";
 
@@ -22,7 +23,8 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
-app.use(usuarioRoutes)
+app.use(usuarioRoutes);
+app.use(agendaRoutes)
 
 app.get("/", (req, res) => {
   res.send("Backend funcionando");
