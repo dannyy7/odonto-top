@@ -54,7 +54,7 @@ Instale as dependências:
 ```bash
 npm install fastify
 npm install @supabase/supabase-js
-npm instal dotenv
+npm install dotenv
 ```
 
 ## Frontend
