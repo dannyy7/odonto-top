@@ -440,26 +440,15 @@ function renderNomeComStatus(usuario) {
 
                 <div className={styles.editHeader}>
                   <h2 className={styles.editTitulo}>
-                    Editar usuário
+                    {dadosEdicao.nomePessoa}
                   </h2>
-
-                  <button
-                    className={`${styles.statusBtn} ${
-                      dadosEdicao.ativo
-                        ? styles.ativo
-                        : styles.inativo
-                    }`}
-                    onClick={toggleAtivo}
-                    type="button"
-                  >
-                    <span className={styles.bolinha}></span>
-                  </button>
 
                 </div>
 
                 <div className={styles.formGrid}>
-                  
-                  <div>
+
+                  <div className={styles.collumn}>
+
                     <label>Nome</label>
 
                     <input
@@ -472,24 +461,24 @@ function renderNomeComStatus(usuario) {
                         })
                       }
                     />
-                  </div>
+                 
 
-                  {/*<div>
-                    <label>Senha</label>
+                    {/*
+                      <label>Senha</label>
 
-                    <input
-                      value={dadosEdicao.senha}
-                      onChange={(e) =>
-                        setDadosEdicao({
-                          ...dadosEdicao,
-                          senha:
-                            e.target.value,
-                        })
-                      }
-                    />
-                  </div>*/}
+                      <input
+                        value={dadosEdicao.senha}
+                        onChange={(e) =>
+                          setDadosEdicao({
+                            ...dadosEdicao,
+                            senha:
+                              e.target.value,
+                          })
+                        }
+                      />
+                    */}
 
-                  <div>
+                  
                     <label>Endereço</label>
 
                     <input
@@ -502,9 +491,9 @@ function renderNomeComStatus(usuario) {
                         })
                       }
                     />
-                  </div>
+                  
 
-                  <div>
+                  
                     <label>Tipo Usuário</label>
 
                     <select
@@ -523,9 +512,9 @@ function renderNomeComStatus(usuario) {
                       <option>Estagiário</option>
                       <option>Paciente</option>
                     </select>
-                  </div>
+                  
 
-                  <div>
+                  
                     <label>E-mail</label>
 
                     <input
@@ -538,40 +527,64 @@ function renderNomeComStatus(usuario) {
                         })
                       }
                     />
-                  </div>
+                  
 
-                  <div>
-                    <label>Telefone</label>
+                  </div>
+                  
+                  
+                    
+                  
+                  <div className={styles.collumn}>
+
+                    
+                      <label>Telefone</label>
 
                     <input
                       value={dadosEdicao.telefone}
                       onChange={(e) =>
-                        setDadosEdicao({
+                         setDadosEdicao({
                           ...dadosEdicao,
                           telefone:
-                            e.target.value,
+                             e.target.value,
                         })
                       }
                     />
+                    
+                      <label className={styles.cancelar}>Status</label>
+
+                      <button
+                        className={`${styles.statusBtn} ${
+                          dadosEdicao.ativo
+                            ? styles.ativo
+                            : styles.inativo
+                        }`}
+                        onClick={toggleAtivo}
+                        type="button"
+                      >
+                        <span className={styles.bolinha}></span>
+                      </button>
+
+                      <div className={styles.buttons}>
+                        <button
+                          className={styles.salvar}
+                          onClick={editarUsuario}
+                        >
+                          Confirmar edição
+                        </button>
+
+                        <button
+                          className={styles.excluir} /*Botão de cancelar ainda não funcional*/
+                        >
+                          Cancelar
+                        </button>
+                    </div>
+
                   </div>
 
+
+
                 </div>
 
-                <div className={styles.buttons}>
-                  <button
-                    className={styles.salvar}
-                    onClick={editarUsuario}
-                  >
-                    Confirmar edição
-                  </button>
-
-                  <button
-                    className={styles.excluir}
-                    onClick={excluirUsuario}
-                  >
-                    Excluir usuário
-                  </button>
-                </div>
 
 
 
