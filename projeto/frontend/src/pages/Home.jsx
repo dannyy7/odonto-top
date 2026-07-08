@@ -28,82 +28,110 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.homePage}>
-      
-      {/* HEADER */}
-      <div className={styles.header}>
-        <img src={logobranca} alt="OdontoTop" className={styles.logo} />
-        <div 
-          className={styles.userIcon} 
-          onClick={() => setAbrirPerfil(true)}
-        >
-          <img src={perfilImg} alt="Usuário" />
-        </div>
+<div className={styles.homePage}>
+  {/* HEADER */}
+  <div className={styles.header}>
+    <img
+      src={logobranca}
+      alt="OdontoTop"
+      className={styles.logo}
+    />
+
+    <div className={styles.usuariocontainer}>
+      <div
+        className={styles.userIcon}
+        onClick={() => setAbrirPerfil(true)}
+      >
+        <img src={perfilImg} alt="Usuário" />
       </div>
 
-      {/* CONTEÚDO */}
-      <div className={styles.grid}>
-        
-        <div className={styles.secao}>
-          <div className={styles.card} onClick={() => window.location.href = "/usuarios"}>
-            <div className={styles.cardTop}>
-              <img src={usuarioazul} alt="Usuários" />
-            </div>
-            <div className={styles.cardBottom}>
-              <h3>Usuários</h3>
-              <p>Pacientes</p>
-              <p>Funcionários</p>
-            </div>
-          </div>
-
-  <div
-  className={styles.card}
-onClick={() => {
-  window.location.href = "/agenda";
-}}>
-  <div className={styles.cardTop}>
-    <img src={calendario} alt="Agenda" />
-  </div>
-
-  <div className={styles.cardBottom}>
-    <h3>Agenda</h3>
-    <p>Estado</p>
-  </div>
-</div>
-
-          <div className={styles.card} onClick={() => window.location.href = "/usuarios"}>
-            <div className={styles.cardTop}>
-              <img src={cardiaco} alt="Tratamentos" />
-            </div>
-            <div className={styles.cardBottom}>
-              <h3>Tratamentos</h3>
-              <p>Fichas de atendimentos</p>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.secao}>
-          <div className={styles.card} onClick={() => window.location.href = "/usuarios"}>
-            <div className={styles.cardTop}>
-              <img src={clips} alt="Documentos" />
-            </div>
-            <div className={styles.cardBottom}>
-              <h3>Modelos de Documentos</h3>
-              <p>Modelos de Doc</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      {/* MODAL PERFIL */}
       {abrirPerfil && (
-        <ModalPerfil 
-          usuario={usuario}
-          onClose={() => setAbrirPerfil(false)}
-          onLogout={sair}
-        />
+        <div className={styles.modalgrupo}>
+          <ModalPerfil
+            usuario={usuario}
+            onClose={() => setAbrirPerfil(false)}
+            onLogout={sair}
+          />
+        </div>
       )}
     </div>
+  </div>
+
+  {/* CONTEÚDO */}
+  <div className={styles.grid}>
+    <div className={styles.secao}>
+      <div
+        className={styles.card}
+        onClick={() => (window.location.href = "/usuarios")}
+      >
+        <div className={styles.cardTop}>
+          <img
+            src={usuarioazul}
+            alt="Usuários"
+          />
+        </div>
+
+        <div className={styles.cardBottom}>
+          <h3>Usuários</h3>
+          <p>Pacientes</p>
+          <p>Funcionários</p>
+        </div>
+      </div>
+
+      <div
+        className={styles.card}
+        onClick={() => (window.location.href = "/agenda")}
+      >
+        <div className={styles.cardTop}>
+          <img
+            src={calendario}
+            alt="Agenda"
+          />
+        </div>
+
+        <div className={styles.cardBottom}>
+          <h3>Agenda</h3>
+          <p>Estado</p>
+        </div>
+      </div>
+
+      <div
+        className={styles.card}
+        onClick={() => (window.location.href = "/usuarios")}
+      >
+        <div className={styles.cardTop}>
+          <img
+            src={cardiaco}
+            alt="Tratamentos"
+          />
+        </div>
+
+        <div className={styles.cardBottom}>
+          <h3>Tratamentos</h3>
+          <p>Fichas de atendimentos</p>
+        </div>
+      </div>
+    </div>
+
+    <div className={styles.secao}>
+      <div
+        className={styles.card}
+        onClick={() => (window.location.href = "/usuarios")}
+      >
+        <div className={styles.cardTop}>
+          <img
+            src={clips}
+            alt="Documentos"
+          />
+        </div>
+
+        <div className={styles.cardBottom}>
+          <h3>Modelos de Documentos</h3>
+          <p>Modelos de Doc</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   );
 }

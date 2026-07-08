@@ -106,6 +106,7 @@
 
 /* PARTE DE CIMA */
 .cardTop {
+  width: 400px;
   background: #a4e3ff;
   height: 130px;
   border-radius: 10px 10px 0 0;
@@ -133,6 +134,7 @@
 
 /* PARTE DE BAIXO */
 .cardBottom {
+  width:400px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -194,12 +196,6 @@
     justify-content: center;
   }
 
-  .card {
-    flex: 1 1 280px;
-    max-width: 360px;
-    min-width: 240px;
-    height: 300px;
-  }
 
   .cardTop {
     height: 120px;
@@ -239,8 +235,7 @@
   }
 
   .card {
-    width: 100%;
-    max-width: 100%;
+    width: 50%;
     min-width: unset;
     flex: unset;
     height: 280px;
@@ -267,4 +262,17 @@
   .cardBottom p {
     font-size: 16px;
   }
+}
+
+.usuariocontainer{
+  position:relative;
+}
+
+.modalgrupo{
+  position: absolute;
+  top: calc(100% + 10px);
+  right:-50%;
+  width: 250px;
+  height: 300px;
+  z-index: 9999;
 }

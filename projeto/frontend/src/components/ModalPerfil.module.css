@@ -1,7 +1,4 @@
 .overlay {
-  position: fixed;
-  top: 70px;
-  right: 20px;
   z-index: 999;
 
   display: flex;
@@ -13,7 +10,6 @@
 }
 
 .modal {
-  position: relative;
 
   width: 340px;
   min-height: 250px;
@@ -181,10 +177,7 @@
 
 /* TABLET */
 @media (max-width: 768px) {
-  .overlay {
-    top: 65px;
-    right: 15px;
-  }
+
 
   .modal {
     width: 320px;
@@ -194,12 +187,8 @@
 
 /* CELULAR */
 @media (max-width: 520px) {
-  .overlay {
-    top: 60px;
-    right: 10px;
-    left: 10px;
-  }
 
+  
   .modal {
     width: 100%;
     max-width: 340px;

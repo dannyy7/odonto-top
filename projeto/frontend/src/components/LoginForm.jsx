@@ -45,6 +45,9 @@ export default function LoginForm({ usuario, senha, setUsuario, setSenha, onSubm
             onChange={(e) => setSenha(e.target.value)}
           />
         </div>
+          <button className={styles.senhaesqueceu}>
+            Esqueceu a senha?  {/*Esqueceu a senha ainda não funcional*/}
+          </button>
 
         <button className={styles.loginButton} onClick={onSubmit}>
           Entrar
