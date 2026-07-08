@@ -435,141 +435,149 @@ function renderNomeComStatus(usuario) {
         <div className={styles.main}>
 
           {usuarioSelecionado && (
-            <div className={styles.editCard}>
+            <div className={styles.overlay}>
+              <div className={styles.editCard}>
 
-              <div className={styles.editHeader}>
-                <h2 className={styles.editTitulo}>
-                  Editar usuário
-                </h2>
+                <div className={styles.editHeader}>
+                  <h2 className={styles.editTitulo}>
+                    Editar usuário
+                  </h2>
 
-                <button
-                  className={`${styles.statusBtn} ${
-                    dadosEdicao.ativo
-                      ? styles.ativo
-                      : styles.inativo
-                  }`}
-                  onClick={toggleAtivo}
-                  type="button"
-                >
-                  {dadosEdicao.ativo ? "Ativo" : "Inativo"}
-                </button>
-              </div>
-
-              <div className={styles.formGrid}>
-                
-                <div>
-                  <label>Nome</label>
-
-                  <input
-                    value={dadosEdicao.nomePessoa}
-                    onChange={(e) =>
-                      setDadosEdicao({
-                        ...dadosEdicao,
-                        nomePessoa:
-                          e.target.value,
-                      })
-                    }
-                  />
-                </div>
-
-                {/*<div>
-                  <label>Senha</label>
-
-                  <input
-                    value={dadosEdicao.senha}
-                    onChange={(e) =>
-                      setDadosEdicao({
-                        ...dadosEdicao,
-                        senha:
-                          e.target.value,
-                      })
-                    }
-                  />
-                </div>*/}
-
-                <div>
-                  <label>Endereço</label>
-
-                  <input
-                    value={dadosEdicao.endereco}
-                    onChange={(e) =>
-                      setDadosEdicao({
-                        ...dadosEdicao,
-                        endereco:
-                          e.target.value,
-                      })
-                    }
-                  />
-                </div>
-
-                <div>
-                  <label>Tipo Usuário</label>
-
-                  <select
-                    value={dadosEdicao.tipo}
-                    onChange={(e) =>
-                      setDadosEdicao({
-                        ...dadosEdicao,
-                        tipo:
-                          e.target.value,
-                      })
-                    }
+                  <button
+                    className={`${styles.statusBtn} ${
+                      dadosEdicao.ativo
+                        ? styles.ativo
+                        : styles.inativo
+                    }`}
+                    onClick={toggleAtivo}
+                    type="button"
                   >
-                    <option>Dentista</option>
-                    <option>Auxiliar</option>
-                    <option>Recepcionista</option>
-                    <option>Estagiário</option>
-                    <option>Paciente</option>
-                  </select>
+                    <span className={styles.bolinha}></span>
+                  </button>
+
                 </div>
 
-                <div>
-                  <label>E-mail</label>
+                <div className={styles.formGrid}>
+                  
+                  <div>
+                    <label>Nome</label>
 
-                  <input
-                    value={dadosEdicao.email}
-                    onChange={(e) =>
-                      setDadosEdicao({
-                        ...dadosEdicao,
-                        email:
-                          e.target.value,
-                      })
-                    }
-                  />
+                    <input
+                      value={dadosEdicao.nomePessoa}
+                      onChange={(e) =>
+                        setDadosEdicao({
+                          ...dadosEdicao,
+                          nomePessoa:
+                            e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+
+                  {/*<div>
+                    <label>Senha</label>
+
+                    <input
+                      value={dadosEdicao.senha}
+                      onChange={(e) =>
+                        setDadosEdicao({
+                          ...dadosEdicao,
+                          senha:
+                            e.target.value,
+                        })
+                      }
+                    />
+                  </div>*/}
+
+                  <div>
+                    <label>Endereço</label>
+
+                    <input
+                      value={dadosEdicao.endereco}
+                      onChange={(e) =>
+                        setDadosEdicao({
+                          ...dadosEdicao,
+                          endereco:
+                            e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <label>Tipo Usuário</label>
+
+                    <select
+                      value={dadosEdicao.tipo}
+                      onChange={(e) =>
+                        setDadosEdicao({
+                          ...dadosEdicao,
+                          tipo:
+                            e.target.value,
+                        })
+                      }
+                    >
+                      <option>Dentista</option>
+                      <option>Auxiliar</option>
+                      <option>Recepcionista</option>
+                      <option>Estagiário</option>
+                      <option>Paciente</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label>E-mail</label>
+
+                    <input
+                      value={dadosEdicao.email}
+                      onChange={(e) =>
+                        setDadosEdicao({
+                          ...dadosEdicao,
+                          email:
+                            e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <label>Telefone</label>
+
+                    <input
+                      value={dadosEdicao.telefone}
+                      onChange={(e) =>
+                        setDadosEdicao({
+                          ...dadosEdicao,
+                          telefone:
+                            e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+
                 </div>
 
-                <div>
-                  <label>Telefone</label>
+                <div className={styles.buttons}>
+                  <button
+                    className={styles.salvar}
+                    onClick={editarUsuario}
+                  >
+                    Confirmar edição
+                  </button>
 
-                  <input
-                    value={dadosEdicao.telefone}
-                    onChange={(e) =>
-                      setDadosEdicao({
-                        ...dadosEdicao,
-                        telefone:
-                          e.target.value,
-                      })
-                    }
-                  />
+                  <button
+                    className={styles.excluir}
+                    onClick={excluirUsuario}
+                  >
+                    Excluir usuário
+                  </button>
                 </div>
+
+
 
               </div>
 
-              <div className={styles.buttons}>
-                <button
-                  className={styles.salvar}
-                  onClick={editarUsuario}
-                >
-                  Confirmar edição
-                </button>
 
-                <button
-                  className={styles.excluir}
-                  onClick={excluirUsuario}
-                >
-                  Excluir usuário
-                </button>
-              </div>
 
             </div>
           )}
