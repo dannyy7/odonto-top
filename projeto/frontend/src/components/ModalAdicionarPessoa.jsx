@@ -215,13 +215,15 @@ return (
           </select>
 
           <div className={styles.actions}>
-            <button onClick={onClose} className={styles.button}>
+
+            <button onClick={salvar} className={`${styles.button} ${styles.save}`}>
+              Salvar
+            </button>
+
+            <button onClick={onClose} className={`${styles.button} ${styles.close}`}>
               Cancelar
             </button>
 
-            <button onClick={salvar} className={styles.button}>
-              Salvar
-            </button>
           </div>
         </div>
 
