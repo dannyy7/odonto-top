@@ -42,7 +42,7 @@ cd projeto
 npm install
 ```
 
-## Backend
+## Bac
 
 Acesse a pasta do backend:
 
@@ -78,8 +78,9 @@ npm install @supabase/supabase-js
 Adicione as tabelas e populacione elas com os arquivos presentes na pasta "Scripts-BD" dentro da pasta de documentacao.
 
 .env do backend 
-VITE_SUPABASE_URL = https://vrpoqxpqwcefhmkejfah.supabase.co
-VITE_SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZycG9xeHBxd2NlZmhta2VqZmFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NDE1NzYsImV4cCI6MjA5MzQxNzU3Nn0.wazCQkFjDiLbx7lKR1nqNWLvUypahjVLiGnGdYei-Go
+SUPABASE_URL=https://vrpoqxpqwcefhmkejfah.supabase.co
+
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZycG9xeHBxd2NlZmhta2VqZmFoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3Nzg0MTU3NiwiZXhwIjoyMDkzNDE3NTc2fQ.rPGWfizRgCzGBj6wD9B0H6TLlVf0yxrZY0QT2ZIgWLg
 
 
 # 4. Como executar o frontend
