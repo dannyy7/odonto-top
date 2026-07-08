@@ -1,12 +1,11 @@
-
-
 .page {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background: #a4e3ff;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Evita qualquer barra de rolagem na tela */
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .header {
@@ -43,7 +42,6 @@
 }
 
 .main {
-    flex: 1;
     display: flex;
     justify-content: center;
     padding: 25px;
@@ -59,8 +57,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribui o topo, o calendário e a pesquisa perfeitamente */
-    height: 100%; /* Faz ele ocupar todo o espaço do main */
+    min-height: calc(100vh - 120px);
 }
 
 .topoCalendario {
@@ -94,7 +91,7 @@
 /* O BLOCO BRANCO DO CALENDÁRIO */
 .calendario {
     width: 100%;
-    flex: 1; /* Faz o calendário crescer dinamicamente ocupando o centro */
+    height: 550px;
     margin: 15px 0;
     background: white;
     border: 2px solid #9cc2ce;
@@ -204,9 +201,8 @@
 }
 
 .containerLista {
-    max-height: 120px; /* Limita o tamanho para não estourar o card azul */
-    overflow-y: auto;  /* Permite rolar caso tenha muitas consultas no dia */
     padding-left: 5px;
+    margin-top: 10px;
 }
 
 .listaConsultas {
@@ -240,4 +236,34 @@
     margin: 0;
     font-size: 16px;
     font-style: italic;
+}
+
+.containerBotao {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.botaoCriarConsulta {
+    width: 90%;
+    max-width: 600px;
+    height: 55px;
+
+    border: none;
+    border-radius: 30px;
+
+    background: #38c3ff;
+    color: white;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.botaoCriarConsulta:hover {
+    background: #25b5f2;
 }

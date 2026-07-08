@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./Agenda.module.css";
+import ModalCriarConsulta from "../components/ModalCriarConsulta";
 
 import casa from "../assets/icones/usuario/casa.png";
 import logobranca from "../assets/logos/odonto-top-branco-fundo-transparente.png";
@@ -9,6 +10,7 @@ export default function Agenda() {
   const [diaSelecionado, setDiaSelecionado] = useState(new Date().getDate());
   const [consultas, setConsultas] = useState([]);
   const [pesquisa, setPesquisa] = useState("");
+  const [modalCriarConsulta, setModalCriarConsulta] = useState(false);
 
   useEffect(() => {
   buscarConsultas();
@@ -207,8 +209,19 @@ async function buscarConsultas() {
                 <p className={styles.semConsulta}>Nenhuma consulta agendada para este dia.</p>
               )}
             </div>
+            <div className={styles.containerBotao}>
+              <button
+                className={styles.botaoCriarConsulta}
+                onClick={() => setModalCriarConsulta(true)}
+            >
+                Criar consulta
+            </button>
+            </div>
           </div>
-
+          <ModalCriarConsulta
+              aberto={modalCriarConsulta}
+              fechar={() => setModalCriarConsulta(false)}
+          />
         </div>
       </main>
 
