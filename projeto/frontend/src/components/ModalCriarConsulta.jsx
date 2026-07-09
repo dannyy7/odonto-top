@@ -8,6 +8,17 @@ export default function ModalCriarConsulta({ aberto, fechar }) {
   const [dentistas, setDentistas] = useState([]);
   const [procedimentos, setProcedimentos] = useState([]);
 
+  const [pacienteSelecionado, setPacienteSelecionado] = useState("");
+  const [dentistaSelecionado, setDentistaSelecionado] = useState("");
+  const [procedimentoSelecionado, setProcedimentoSelecionado] = useState("");
+
+  const [dia, setDia] = useState(1);
+  const [mes, setMes] = useState(1);
+  const [ano, setAno] = useState(2026);
+
+  const [hora, setHora] = useState("00");
+  const [minuto, setMinuto] = useState("00");
+
   useEffect(() => {
   buscarPacientes();
   buscarDentistas();
@@ -72,6 +83,54 @@ async function buscarProcedimentos() {
 
   setProcedimentos(data);
 }
+
+async function salvarConsulta() {
+
+  const dataHora =
+    `${ano}-${String(mes).padStart(2,"0")}-${String(dia).padStart(2,"0")} ${hora}:${minuto}:00`;
+
+  // Salva a consulta
+  const { data: consulta, error } = await supabase
+    .from("consulta")
+    .insert({
+      dataHora: dataHora,
+      tipo: "Primeira Consulta",
+      status: "Agendada",
+      idPacienteConsulta: pacienteSelecionado,
+      idFuncionarioConsulta: dentistaSelecionado
+    })
+    .select()
+    .single();
+
+  if (error) {
+    console.log(error);
+    alert("Erro ao criar consulta");
+    return;
+  }
+
+  // Salva o procedimento da consulta
+  const { error: erroProcedimento } = await supabase
+  .from("consultaProcedimento")
+  .insert({
+    idConsulProc: consulta.idConsulta,
+    idProcConsul: procedimentoSelecionado
+  });
+
+  if (erroProcedimento) {
+    console.log(erroProcedimento);
+console.log(erroProcedimento.message);
+console.log(erroProcedimento.details);
+console.log(erroProcedimento.hint);
+console.log(erroProcedimento.code);
+    alert("Erro ao salvar procedimento");
+    return;
+  }
+
+  alert("Consulta criada!");
+
+  fechar();
+}
+
   if (!aberto) return null;
 
   return (
@@ -81,7 +140,10 @@ async function buscarProcedimentos() {
         <h2>Criar consulta</h2>
 
         <label>Paciente</label>
-        <select>
+        <select
+          value={pacienteSelecionado}
+          onChange={(e) => setPacienteSelecionado(e.target.value)}
+        >
 
           <option value="">
             Selecione
@@ -90,8 +152,8 @@ async function buscarProcedimentos() {
           {pacientes.map((paciente) => (
 
             <option
-              key={paciente.idPessoaPaciente}
-              value={paciente.idPessoaPaciente}
+              key={paciente.idPaciente}
+              value={paciente.idPaciente}
             >
               {paciente.pessoa.nomePessoa}
             </option>
@@ -101,7 +163,10 @@ async function buscarProcedimentos() {
         </select>
 
         <label>Dentista</label>
-        <select>
+        <select
+          value={dentistaSelecionado}
+          onChange={(e) => setDentistaSelecionado(e.target.value)}
+        >
 
   <option value="">
     Selecione
@@ -110,8 +175,8 @@ async function buscarProcedimentos() {
   {dentistas.map((dentista) => (
 
     <option
-      key={dentista.idPessoaFuncionario}
-      value={dentista.idPessoaFuncionario}
+      key={dentista.idFuncionario}
+      value={dentista.idFuncionario}
     >
       {dentista.pessoa.nomePessoa}
     </option>
@@ -121,7 +186,10 @@ async function buscarProcedimentos() {
 </select>
 
         <label>Procedimento</label>
-        <select>
+        <select
+          value={procedimentoSelecionado}
+          onChange={(e) => setProcedimentoSelecionado(e.target.value)}
+        >
 
   <option value="">
     Selecione
@@ -148,7 +216,10 @@ async function buscarProcedimentos() {
             <div className={styles.data}>
               <div>
                 <span>Dia</span>
-                <select>
+                <select
+                  value={dia}
+                  onChange={(e) => setDia(e.target.value)}
+                >
                   {Array.from({ length: 31 }, (_, i) => (
                     <option key={i + 1}>{i + 1}</option>
                   ))}
@@ -157,7 +228,10 @@ async function buscarProcedimentos() {
 
               <div>
                 <span>Mês</span>
-                <select>
+                <select
+                  value={mes}
+                  onChange={(e) => setMes(e.target.value)}
+                >
                   {Array.from({ length: 12 }, (_, i) => (
                     <option key={i + 1}>{i + 1}</option>
                   ))}
@@ -166,7 +240,10 @@ async function buscarProcedimentos() {
 
               <div>
                 <span>Ano</span>
-                <select>
+                <select
+                  value={ano}
+                  onChange={(e) => setAno(e.target.value)}
+                >
                   <option>2026</option>
                   <option>2027</option>
                 </select>
@@ -183,7 +260,10 @@ async function buscarProcedimentos() {
 
               <div>
                 <span>Horas</span>
-                <select>
+                <select
+                  value={hora}
+                  onChange={(e) => setHora(e.target.value)}
+                >
                   {Array.from({ length: 24 }, (_, i) => (
                     <option key={i}>{String(i).padStart(2, "0")}</option>
                   ))}
@@ -192,7 +272,10 @@ async function buscarProcedimentos() {
 
               <div>
                 <span>Minutos</span>
-                <select>
+                <select
+                  value={minuto}
+                  onChange={(e) => setMinuto(e.target.value)}
+                >
                   <option>00</option>
                   <option>15</option>
                   <option>30</option>
@@ -211,9 +294,10 @@ async function buscarProcedimentos() {
             Cancelar
           </button>
 
-          <button className={styles.salvar}>
-            Salvar
-          </button>
+         <button
+          className={styles.salvar}
+          onClick={salvarConsulta}
+        >Salvar</button>
         </div>
 
       </div>
