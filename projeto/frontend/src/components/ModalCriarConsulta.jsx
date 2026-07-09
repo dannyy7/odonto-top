@@ -1,6 +1,77 @@
 import styles from "./ModalCriarConsulta.module.css";
+import { useEffect, useState } from "react";
+import { supabase } from "../services/supabaseCliente";
 
 export default function ModalCriarConsulta({ aberto, fechar }) {
+
+  const [pacientes, setPacientes] = useState([]);
+  const [dentistas, setDentistas] = useState([]);
+  const [procedimentos, setProcedimentos] = useState([]);
+
+  useEffect(() => {
+  buscarPacientes();
+  buscarDentistas();
+  buscarProcedimentos();
+  }, []);
+
+  async function buscarPacientes() {
+
+  const { data, error } = await supabase
+    .from("paciente")
+    .select(`
+      idPaciente,
+      idPessoaPaciente,
+      pessoa!paciente_idPessoaPaciente_fkey(
+        nomePessoa
+      )
+    `);
+
+  console.log(data);
+  console.log(error);
+
+  if (error) return;
+
+  setPacientes(data);
+}
+
+async function buscarDentistas() {
+
+  const { data, error } = await supabase
+    .from("funcionario")
+    .select(`
+      idFuncionario,
+      idPessoaFuncionario,
+      pessoa!funcionario_idPessoaFuncionario_fkey(
+        nomePessoa,
+        tipo
+      )
+    `);
+
+  console.log(data);
+  console.log(error);
+
+  if (error) return;
+
+  const somenteDentistas = data.filter(
+    funcionario => funcionario.pessoa?.tipo === "Dentista"
+  );
+
+  setDentistas(somenteDentistas);
+}
+
+async function buscarProcedimentos() {
+
+  const { data, error } = await supabase
+    .from("procedimento")
+    .select("*");
+
+  console.log(data);
+  console.log(error);
+
+  if (error) return;
+
+  setProcedimentos(data);
+}
   if (!aberto) return null;
 
   return (
@@ -10,15 +81,64 @@ export default function ModalCriarConsulta({ aberto, fechar }) {
         <h2>Criar consulta</h2>
 
         <label>Paciente</label>
-        <input type="text" />
+        <select>
+
+          <option value="">
+            Selecione
+          </option>
+
+          {pacientes.map((paciente) => (
+
+            <option
+              key={paciente.idPessoaPaciente}
+              value={paciente.idPessoaPaciente}
+            >
+              {paciente.pessoa.nomePessoa}
+            </option>
+
+          ))}
+
+        </select>
 
         <label>Dentista</label>
-        <input type="text" />
+        <select>
+
+  <option value="">
+    Selecione
+  </option>
+
+  {dentistas.map((dentista) => (
+
+    <option
+      key={dentista.idPessoaFuncionario}
+      value={dentista.idPessoaFuncionario}
+    >
+      {dentista.pessoa.nomePessoa}
+    </option>
+
+  ))}
+
+</select>
 
         <label>Procedimento</label>
         <select>
-          <option></option>
-        </select>
+
+  <option value="">
+    Selecione
+  </option>
+
+  {procedimentos.map((procedimento) => (
+
+    <option
+      key={procedimento.idProcedimento}
+      value={procedimento.idProcedimento}
+    >
+      {procedimento.nomeProcedimento}
+    </option>
+
+  ))}
+
+</select>
 
         <div className={styles.linha}>
 
