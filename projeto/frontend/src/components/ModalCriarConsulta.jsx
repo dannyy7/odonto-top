@@ -19,6 +19,8 @@ export default function ModalCriarConsulta({ aberto, fechar }) {
   const [hora, setHora] = useState("00");
   const [minuto, setMinuto] = useState("00");
 
+  const [novoProcedimento, setNovoProcedimento] = useState("");
+
   useEffect(() => {
   buscarPacientes();
   buscarDentistas();
@@ -118,10 +120,10 @@ async function salvarConsulta() {
 
   if (erroProcedimento) {
     console.log(erroProcedimento);
-console.log(erroProcedimento.message);
-console.log(erroProcedimento.details);
-console.log(erroProcedimento.hint);
-console.log(erroProcedimento.code);
+    console.log(erroProcedimento.message);
+    console.log(erroProcedimento.details);
+    console.log(erroProcedimento.hint);
+    console.log(erroProcedimento.code);
     alert("Erro ao salvar procedimento");
     return;
   }
@@ -129,6 +131,28 @@ console.log(erroProcedimento.code);
   alert("Consulta criada!");
 
   fechar();
+}
+
+function adicionarProcedimento(e) {
+
+  if (e.key !== "Enter") return;
+
+  e.preventDefault();
+
+  const nome = novoProcedimento.trim();
+
+  if (!nome) return;
+
+  const procedimento = {
+    idProcedimento: `novo-${Date.now()}`,
+    nomeProcedimento: nome
+  };
+
+  setProcedimentos((lista) => [...lista, procedimento]);
+
+  setProcedimentoSelecionado(procedimento.idProcedimento);
+
+  setNovoProcedimento("");
 }
 
   if (!aberto) return null;
@@ -185,28 +209,38 @@ console.log(erroProcedimento.code);
 
 </select>
 
-        <label>Procedimento</label>
-        <select
-          value={procedimentoSelecionado}
-          onChange={(e) => setProcedimentoSelecionado(e.target.value)}
-        >
+<label>Procedimento</label>
 
-  <option value="">
-    Selecione
-  </option>
+<select
+    value={procedimentoSelecionado}
+    onChange={(e) => setProcedimentoSelecionado(e.target.value)}
+>
 
-  {procedimentos.map((procedimento) => (
-
-    <option
-      key={procedimento.idProcedimento}
-      value={procedimento.idProcedimento}
-    >
-      {procedimento.nomeProcedimento}
+    <option value="">
+        Selecione
     </option>
 
-  ))}
+    {procedimentos.map((procedimento) => (
+
+        <option
+            key={procedimento.idProcedimento}
+            value={procedimento.idProcedimento}
+        >
+            {procedimento.nomeProcedimento}
+        </option>
+
+    ))}
 
 </select>
+
+<input
+    type="text"
+    placeholder="Adicionar procedimento..."
+    value={novoProcedimento}
+    onChange={(e) => setNovoProcedimento(e.target.value)}
+    onKeyDown={adicionarProcedimento}
+    className={styles.inputProcedimento}
+/>
 
         <div className={styles.linha}>
 

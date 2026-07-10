@@ -1,0 +1,182 @@
+.overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.35);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:1000;
+}
+
+.modal{
+    position: relative;
+
+    width:560px;
+
+    background:white;
+
+    border-radius:10px;
+
+    padding:26px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:14px;
+}
+.modal h2{
+
+    margin:0;
+
+    color:#0094d8;
+
+    font-size:28px;
+}
+
+.modal label{
+
+    color:#888;
+
+    font-weight:bold;
+}
+
+.modal select{
+
+    height:42px;
+
+    border-radius:8px;
+
+    border:2px solid #d8d8d8;
+
+    background:#efefef;
+
+    padding:0 10px;
+
+    font-size:16px;
+}
+
+.editar{
+
+    height:42px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#9d9d9d;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.editar:hover{
+
+    background:#878787;
+}
+
+.botoes{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+}
+
+.cancelar{
+
+    flex:1;
+
+    height:44px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#ff5050;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.cancelar:hover{
+
+    background:#e43737;
+}
+
+.concluir{
+
+    flex:1;
+
+    height:44px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#38c3ff;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.concluir:hover{
+
+    background:#18aceb;
+}
+
+.botaoFechar{
+
+    position:absolute;
+
+    top:12px;
+    right:14px;
+
+    width:30px;
+    height:30px;
+
+    border:none;
+    background:transparent;
+
+    color:#9a9a9a;
+
+    font-size:24px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    border-radius:50%;
+
+    transition:.2s;
+}
+
+.botaoFechar:hover{
+
+    background:#efefef;
+
+    color:#555;
+}

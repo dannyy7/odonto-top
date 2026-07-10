@@ -184,3 +184,33 @@
 
     background:#002e42;
 }
+
+.inputProcedimento{
+
+    width:100% !important;
+
+    height:29px !important;
+
+    min-height:24px !important;
+
+    margin-top:2px !important;
+
+    padding:0 8px !important;
+
+    background:#f6f6f6 !important;
+
+    border:1px solid #d5d5d5 !important;
+
+    border-radius:4px !important;
+
+    font-size:12px !important;
+
+    color:#666 !important;
+
+    box-sizing:border-box !important;
+}
+
+.inputProcedimento::placeholder{
+    color:#a0a0a0;
+    font-style:italic;
+}

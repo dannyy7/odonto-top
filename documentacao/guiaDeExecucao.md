@@ -42,7 +42,7 @@ cd projeto
 npm install
 ```
 
-## Bac
+## Backend
 
 Acesse a pasta do backend:
 
@@ -57,6 +57,10 @@ npm install @supabase/supabase-js
 npm install dotenv
 ```
 
+Execute o servidor:
+```bash
+npm start
+```
 ## Frontend
 
 Acesse a pasta do frontend:
@@ -77,7 +81,8 @@ npm install @supabase/supabase-js
 
 Adicione as tabelas e populacione elas com os arquivos presentes na pasta "Scripts-BD" dentro da pasta de documentacao.
 
-.env do backend 
+Crie um arquivo .env dentro da pasta backend e adicione o seguinte conteúdo:
+
 SUPABASE_URL=https://vrpoqxpqwcefhmkejfah.supabase.co
 
 SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZycG9xeHBxd2NlZmhta2VqZmFoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3Nzg0MTU3NiwiZXhwIjoyMDkzNDE3NTc2fQ.rPGWfizRgCzGBj6wD9B0H6TLlVf0yxrZY0QT2ZIgWLg
@@ -99,4 +104,3 @@ O site estará disponível em:
 ```
 http://localhost:3000
 ```
-

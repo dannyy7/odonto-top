@@ -267,3 +267,19 @@
 .botaoCriarConsulta:hover {
     background: #25b5f2;
 }
+
+.itemConsulta{
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    border-radius:6px;
+
+    padding:4px 6px;
+}
+
+.itemConsulta:hover{
+
+    background:#dff5ff;
+}

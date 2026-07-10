@@ -4,6 +4,7 @@ import ModalCriarConsulta from "../components/ModalCriarConsulta";
 
 import casa from "../assets/icones/usuario/casa.png";
 import logobranca from "../assets/logos/odonto-top-branco-fundo-transparente.png";
+import ModalConsulta from "../components/ModalConsulta";
 
 export default function Agenda() {
   const [dataAtual, setDataAtual] = useState(new Date());
@@ -11,6 +12,8 @@ export default function Agenda() {
   const [consultas, setConsultas] = useState([]);
   const [pesquisa, setPesquisa] = useState("");
   const [modalCriarConsulta, setModalCriarConsulta] = useState(false);
+  const [modalConsulta, setModalConsulta] = useState(false);
+  const [consultaSelecionada, setConsultaSelecionada] = useState(null);
 
   useEffect(() => {
   buscarConsultas();
@@ -52,6 +55,11 @@ async function buscarConsultas() {
   function mesAnterior() {
     setDataAtual(new Date(ano, mes - 1, 1));
     setDiaSelecionado(1);
+  }
+
+  function abrirConsulta(consulta) {
+  setConsultaSelecionada(consulta);
+  setModalConsulta(true);
   }
 
   const nomeMes = dataAtual.toLocaleString("pt-BR", { month: "long" });
@@ -174,7 +182,11 @@ async function buscarConsultas() {
               {consultasDoDia.length > 0 ? (
                 <ul className={styles.listaConsultas}>
                   {consultasDoDia.map((consulta) => (
-                    <li key={consulta.idConsulta}>
+                    <li
+                      key={consulta.idConsulta}
+                      className={styles.itemConsulta}
+                      onClick={() => abrirConsulta(consulta)}
+                    >
 
                       <span className={styles.pontoConsulta}></span>
 
@@ -221,6 +233,11 @@ async function buscarConsultas() {
           <ModalCriarConsulta
               aberto={modalCriarConsulta}
               fechar={() => setModalCriarConsulta(false)}
+          />
+          <ModalConsulta
+              aberto={modalConsulta}
+              consulta={consultaSelecionada}
+              fechar={() => setModalConsulta(false)}
           />
         </div>
       </main>
