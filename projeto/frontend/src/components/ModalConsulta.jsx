@@ -6,7 +6,8 @@ import { supabase } from "../services/supabaseCliente";
 export default function ModalConsulta({
     aberto,
     consulta,
-    fechar
+    fechar,
+    atualizarConsultas
 }) {
 
     const [modalEditar, setModalEditar] = useState(false);
@@ -32,6 +33,7 @@ export default function ModalConsulta({
         }
 
         alert("Consulta cancelada!");
+        await atualizarConsultas();
         fechar();
     }
 
@@ -54,6 +56,7 @@ export default function ModalConsulta({
         }
 
         alert("Consulta concluída!");
+        await atualizarConsultas();
         fechar();
     }
 
@@ -81,11 +84,14 @@ export default function ModalConsulta({
 
                     <label>Forma de pagamento</label>
 
-                    <select>
-                        <option></option>
-                        <option>Dinheiro</option>
-                        <option>Pix</option>
-                        <option>Cartão</option>
+                    <select
+                        onClick={() => console.log("clicou")}
+                        onChange={(e) => console.log(e.target.value)}
+                    >
+                        <option value=""></option>
+                        <option value="Dinheiro">Dinheiro</option>
+                        <option value="Pix">Pix</option>
+                        <option value="Cartão">Cartão</option>
                     </select>
 
                     <button
@@ -121,6 +127,7 @@ export default function ModalConsulta({
                 aberto={modalEditar}
                 consulta={consulta}
                 fechar={() => setModalEditar(false)}
+                atualizarConsultas={atualizarConsultas}
             />
         </>
     );

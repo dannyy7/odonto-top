@@ -5,8 +5,16 @@ import styles from "./ModalCriarConsulta.module.css";
 export default function ModalEditarConsulta({
     aberto,
     consulta,
-    fechar
+    fechar,
+    atualizarConsultas
 }) {
+
+    const [dia, setDia] = useState(1);
+    const [mes, setMes] = useState(1);
+    const [ano, setAno] = useState(2026);
+
+    const [hora, setHora] = useState("00");
+    const [minuto, setMinuto] = useState("00");
 
     const [procedimentos, setProcedimentos] = useState([]);
     const [procedimentoSelecionado, setProcedimentoSelecionado] = useState("");
@@ -17,13 +25,22 @@ export default function ModalEditarConsulta({
 
     useEffect(() => {
 
-        if (!consulta) return;
+    if (!consulta) return;
 
-        setProcedimentoSelecionado(
-            consulta.consultaProcedimento?.[0]?.idProcConsul ?? ""
-        );
+    setProcedimentoSelecionado(
+        consulta.consultaProcedimento?.[0]?.idProcConsul ?? ""
+    );
 
-    }, [consulta]);
+    const data = new Date(consulta.dataHora);
+
+    setDia(data.getDate());
+    setMes(data.getMonth() + 1);
+    setAno(data.getFullYear());
+
+    setHora(String(data.getHours()).padStart(2, "0"));
+    setMinuto(String(data.getMinutes()).padStart(2, "0"));
+
+}, [consulta]);
 
     async function buscarProcedimentos() {
 
@@ -41,14 +58,44 @@ export default function ModalEditarConsulta({
 
     if (!aberto || !consulta) return null;
 
-    const data = new Date(consulta.dataHora);
+    async function salvarEdicao() {
 
-    const dia = data.getDate();
-    const mes = data.getMonth() + 1;
-    const ano = data.getFullYear();
+        const dataHora =
+            `${ano}-${String(mes).padStart(2, "0")}-${String(dia).padStart(2, "0")} ${hora}:${minuto}:00`;
 
-    const hora = String(data.getHours()).padStart(2, "0");
-    const minuto = String(data.getMinutes()).padStart(2, "0");
+        const { error } = await supabase
+            .from("consulta")
+            .update({
+                dataHora: dataHora
+            })
+            .eq("idConsulta", consulta.idConsulta);
+
+        if (error) {
+            console.log(error);
+            alert("Erro ao atualizar consulta.");
+            return;
+        }
+
+        const { error: erroProcedimento } = await supabase
+            .from("consultaProcedimento")
+            .update({
+                idProcConsul: procedimentoSelecionado
+            })
+            .eq("idConsulProc", consulta.idConsulta);
+
+        if (erroProcedimento) {
+            console.log(erroProcedimento);
+            alert("Erro ao atualizar procedimento.");
+            return;
+        }
+
+        alert("Consulta atualizada!");
+        await atualizarConsultas();
+        fechar();
+    }
+
+    console.log(consulta);
+
 
     return (
 
@@ -108,7 +155,10 @@ export default function ModalEditarConsulta({
 
                                 <span>Dia</span>
 
-                                <select defaultValue={dia}>
+                                <select
+                                    value={dia}
+                                    onChange={(e) => setDia(e.target.value)}
+                                >
                                     {Array.from({ length: 31 }, (_, i) => (
                                         <option key={i + 1}>
                                             {i + 1}
@@ -122,7 +172,10 @@ export default function ModalEditarConsulta({
 
                                 <span>Mês</span>
 
-                                <select defaultValue={mes}>
+                               <select
+                                    value={mes}
+                                    onChange={(e) => setMes(e.target.value)}
+                                >
                                     {Array.from({ length: 12 }, (_, i) => (
                                         <option key={i + 1}>
                                             {i + 1}
@@ -136,7 +189,10 @@ export default function ModalEditarConsulta({
 
                                 <span>Ano</span>
 
-                                <select defaultValue={ano}>
+                              <select
+                                value={ano}
+                                onChange={(e) => setAno(e.target.value)}
+                            >
                                     <option>2026</option>
                                     <option>2027</option>
                                 </select>
@@ -157,7 +213,10 @@ export default function ModalEditarConsulta({
 
                                 <span>Horas</span>
 
-                                <select defaultValue={hora}>
+                                <select
+                                    value={hora}
+                                    onChange={(e) => setHora(e.target.value)}
+                                >
                                     {Array.from({ length: 24 }, (_, i) => (
                                         <option key={i}>
                                             {String(i).padStart(2, "0")}
@@ -171,7 +230,10 @@ export default function ModalEditarConsulta({
 
                                 <span>Minutos</span>
 
-                                <select defaultValue={minuto}>
+                                <select
+                                    value={minuto}
+                                    onChange={(e) => setMinuto(e.target.value)}
+                                >
                                     <option>00</option>
                                     <option>15</option>
                                     <option>30</option>
@@ -197,6 +259,7 @@ export default function ModalEditarConsulta({
 
                     <button
                         className={styles.salvar}
+                        onClick={salvarEdicao}
                     >
                         Salvar
                     </button>

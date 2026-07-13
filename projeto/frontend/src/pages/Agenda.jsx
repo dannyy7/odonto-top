@@ -238,6 +238,7 @@ async function buscarConsultas() {
               aberto={modalConsulta}
               consulta={consultaSelecionada}
               fechar={() => setModalConsulta(false)}
+              atualizarConsultas={buscarConsultas}
           />
         </div>
       </main>
