@@ -1,6 +1,7 @@
 import styles from "./ModalConsulta.module.css";
 import { useState } from "react";
 import ModalEditarConsulta from "./ModalEditarConsulta";
+import { supabase } from "../services/supabaseCliente";
 
 export default function ModalConsulta({
     aberto,
@@ -11,6 +12,50 @@ export default function ModalConsulta({
     const [modalEditar, setModalEditar] = useState(false);
 
     if (!aberto || !consulta) return null;
+
+    async function cancelarConsulta() {
+
+        const { data, error } = await supabase
+            .from("consulta")
+            .update({
+                status: "Cancelada"
+            })
+            .eq("idConsulta", consulta.idConsulta)
+            .select();
+
+        console.log("DATA:", data);
+        console.log("ERROR:", error);
+
+        if (error) {
+            alert(error.message);
+            return;
+        }
+
+        alert("Consulta cancelada!");
+        fechar();
+    }
+
+    async function concluirConsulta() {
+
+        const { data, error } = await supabase
+            .from("consulta")
+            .update({
+                status: "Concluída"
+            })
+            .eq("idConsulta", consulta.idConsulta)
+            .select();
+
+        console.log("DATA:", data);
+        console.log("ERROR:", error);
+
+        if (error) {
+            alert(error.message);
+            return;
+        }
+
+        alert("Consulta concluída!");
+        fechar();
+    }
 
     return (
         <>
@@ -52,11 +97,17 @@ export default function ModalConsulta({
 
                     <div className={styles.botoes}>
 
-                        <button className={styles.cancelar}>
+                       <button
+                            className={styles.cancelar}
+                            onClick={cancelarConsulta}
+                        >
                             Cancelar consulta
                         </button>
 
-                        <button className={styles.concluir}>
+                        <button
+                            className={styles.concluir}
+                            onClick={concluirConsulta}
+                        >
                             Marcar consulta como concluída
                         </button>
 
