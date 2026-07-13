@@ -434,6 +434,16 @@ function renderNomeComStatus(usuario) {
         {/* ÁREA PRINCIPAL */}
         <div className={styles.main}>
 
+          <div className={styles.searchContainer}>
+            <span className={styles.searchIcon}>🔍</span>
+
+            <input type="text"
+            className={styles.searchInput}
+            placeholder=""
+            //onChange() para implementar o backend da pesquisa
+            />
+          </div>
+
           {usuarioSelecionado && (
             <div className={styles.overlay}>
               <div className={styles.editCard}>
