@@ -573,7 +573,8 @@ function renderNomeComStatus(usuario) {
                         </button>
 
                         <button
-                          className={styles.excluir} /*Botão de cancelar ainda não funcional*/
+                          className={styles.excluir}
+                          onClick={() => setUsuarioSelecionado(null)}
                         >
                           Cancelar
                         </button>
