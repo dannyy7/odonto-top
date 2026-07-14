@@ -62,30 +62,3 @@ async (req, res) => {
 
 };
 
-export const excluirUsuarioAuth =
-async (req, res) => {
-
-  try {
-
-    const { userId } =
-      req.params;
-
-    await UsuarioModel
-      .excluirUsuario(userId);
-
-    res.json({
-      mensagem:
-        "Usuário removido"
-    });
-
-  } catch (error) {
-
-    console.log(error);
-
-    res.status(400).json({
-      erro: error.message
-    });
-
-  }
-
-};

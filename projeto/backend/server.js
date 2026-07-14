@@ -1,7 +1,6 @@
 import express from 'express';
 import usuarioRoutes from "./routes/usuario.routes.js";
 import agendaRoutes from "./routes/agenda.routes.js"
-//import mysql from 'mysql2'
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -23,6 +22,23 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+import session from "express-session";
+
+app.use(
+  session({
+    secret: "odonto-top-2026",
+    resave: false,
+    saveUninitialized: false,
+
+    cookie: {
+      httpOnly: true,
+      secure: false, // true somente quando usar HTTPS
+      sameSite: "lax",
+      maxAge: 1000 * 60 * 60 * 24 // 24 horas
+    }
+  })
+);
+
 app.use(usuarioRoutes);
 app.use(agendaRoutes)
 
@@ -31,66 +47,7 @@ app.get("/", (req, res) => {
 });
 
 
-
-// ✅ CONEXÃO MYSQL (RAILWAY)
-//const db = mysql.createConnection({
-  //host: 'caboose.proxy.rlwy.net',
-  //user: 'root',
-  //password: 'HOjpoIMBJSKhYphJkpeHSuQDRHgQHAuu',
-  //database: 'railway',
-  //port: 14956
-//})
-
-//db.connect((err) => {
- // if (err) {
- //   console.error('❌ Erro ao conectar no MySQL:', err)
- // } else {
- //   console.log('✅ Conectado ao MySQL (Railway)!')
- // }
-//})
-
-// ✅ TESTE
-//app.get('/', (req, res) => {
- // res.send('🔥 SERVIDOR ONLINE COM RAILWAY 🔥')
-//})
-
-//app.get("/teste-banco", (req, res) => {
-//  db.query("SELECT * FROM pessoa", (err, result) => {
-//    if (err) {
-//      console.error(err)
-//      return res.json({ erro: err })
-//    }
-//    res.json(result)
-//  })
-//})
-
-// ✅ LOGIN (CPF OU NOME)
-//app.post('/login', (req, res) => {
- // const { usuario, senha } = req.body
-
- // const sql = 'SELECT * FROM pessoa WHERE cpf = ? OR nome = ?'
-
-//  db.query(sql, [usuario, usuario], (err, result) => {
-   // if (err) {
-   //   console.error(err)
-   //   return res.status(500).json({ error: 'Erro no servidor' })
-   // }
-
-   // if (result.length === 0) {
-     // return res.json({ success: false, message: 'Usuário não encontrado' })
-    //}
-
-   // const user = result[0]
-
-   // if (user.senha !== senha) {
-     // return res.json({ success: false, message: 'Senha incorreta' })
-   // }
-
-   // res.json({ success: true, user })
- // })
-//})
-
-// ✅ PORTA
+// PORTA
 app.listen(3001, () => {
   console.log('🚀 Servidor rodando em http://localhost:3001')
 })

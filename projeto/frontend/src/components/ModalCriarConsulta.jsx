@@ -35,7 +35,8 @@ export default function ModalCriarConsulta({ aberto, fechar }) {
       idPaciente,
       idPessoaPaciente,
       pessoa!paciente_idPessoaPaciente_fkey(
-        nomePessoa
+        nomePessoa,
+        ativo
       )
     `);
 
@@ -44,7 +45,11 @@ export default function ModalCriarConsulta({ aberto, fechar }) {
 
   if (error) return;
 
-  setPacientes(data);
+  const pacientesAtivos = data.filter(
+    paciente => paciente.pessoa?.ativo === true
+  );
+
+setPacientes(pacientesAtivos);
 }
 
 async function buscarDentistas() {
@@ -56,7 +61,8 @@ async function buscarDentistas() {
       idPessoaFuncionario,
       pessoa!funcionario_idPessoaFuncionario_fkey(
         nomePessoa,
-        tipo
+        tipo,
+        ativo
       )
     `);
 
@@ -66,10 +72,10 @@ async function buscarDentistas() {
   if (error) return;
 
   const somenteDentistas = data.filter(
-    funcionario => funcionario.pessoa?.tipo === "Dentista"
+    funcionario =>
+      funcionario.pessoa?.tipo === "Dentista" &&
+      funcionario.pessoa?.ativo === true
   );
-
-  setDentistas(somenteDentistas);
 }
 
 async function buscarProcedimentos() {

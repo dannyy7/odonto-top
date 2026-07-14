@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { supabase } from "../services/supabaseCliente";
 import ModalAdicionarPessoa from "../components/ModalAdicionarPessoa";
 import styles from "./Usuarios.module.css";
@@ -11,6 +11,8 @@ export default function Usuarios() {
 
   const [pacientes, setPacientes] = useState([]);
   const [funcionarios, setFuncionarios] = useState([]);
+  const [todosUsuarios, setTodosUsuarios] = useState([]);
+  
 
   const [mostrarPacientes, setMostrarPacientes] =
     useState(true);
@@ -23,6 +25,8 @@ export default function Usuarios() {
 
   const [pesquisaFuncionario, setPesquisaFuncionario] =
     useState("");
+
+  const [pesquisa, setPesquisa] = useState("");
 
     const [usuarioSelecionado, setUsuarioSelecionado] =
   useState(null);
@@ -37,6 +41,28 @@ const [dadosEdicao, setDadosEdicao] =
     ativo: true, 
   });
 
+  useEffect(() => {
+  buscarTodosUsuarios();
+}, []);
+
+
+  //buscar todos usuários
+  async function buscarTodosUsuarios() {
+
+  const { data, error } =
+    await supabase
+      .from("pessoa")
+      .select("*");
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  setTodosUsuarios(data);
+
+}
+
   // =========================
   // BUSCAR PACIENTES
   // =========================
@@ -46,7 +72,8 @@ const [dadosEdicao, setDadosEdicao] =
     const { data, error } = await supabase
       .from("pessoa")
       .select("*")
-      .eq("tipo", "Paciente");
+      .eq("tipo", "Paciente")
+      .eq("ativo", true);
 
     if (error) {
       console.log(error);
@@ -67,12 +94,16 @@ const [dadosEdicao, setDadosEdicao] =
     const { data, error } = await supabase
       .from("pessoa")
       .select("*")
-      .neq("tipo", "Paciente");
+      .neq("tipo", "Paciente")
+      .eq("ativo", true);
 
     if (error) {
       console.log(error);
       return;
     }
+
+    console.log(data);
+    console.log(error);
 
     setFuncionarios(data || []);
   }
@@ -97,6 +128,13 @@ const [dadosEdicao, setDadosEdicao] =
           pesquisaFuncionario.toLowerCase()
         )
     );
+
+    const usuariosPesquisados =
+      todosUsuarios.filter(usuario =>
+        usuario.nomePessoa
+          ?.toLowerCase()
+          .includes(pesquisa.toLowerCase())
+      );
 
   function selecionarUsuario(usuario) {
     setUsuarioSelecionado(usuario);
@@ -171,6 +209,7 @@ function renderNomeComStatus(usuario) {
       email: dadosEdicao.email,
       telefone: dadosEdicao.telefone,
       tipo: tipoNovo,
+      ativo: dadosEdicao.ativo,
     })
     .eq("idPessoa", usuarioSelecionado.idPessoa);
 
@@ -244,60 +283,11 @@ function renderNomeComStatus(usuario) {
 
   buscarPacientes();
   buscarFuncionarios();
+  buscarTodosUsuarios();
 
   setUsuarioSelecionado(null);
 }
 
-  // =========================
-  // EXCLUIR USUÁRIO
-  // =========================
-  async function excluirUsuario() {
-
-  if (!usuarioSelecionado)
-    return;
-
-  const confirmar =
-    window.confirm(
-      "Deseja excluir este usuário?"
-    );
-
-  if (!confirmar) return;
-
-  // REMOVE DO AUTH
-  await fetch(
-    `http://localhost:3001/excluir-usuario/${usuarioSelecionado.userId}`,
-    {
-      method: "DELETE",
-    }
-  );
-
-  // REMOVE DA TABELA PESSOA
-  const { error } =
-    await supabase
-      .from("pessoa")
-      .delete()
-      .eq(
-        "userId",
-        usuarioSelecionado.userId
-      );
-
-  if (error) {
-    console.log(error);
-
-    alert(
-      "Erro ao excluir"
-    );
-
-    return;
-  }
-
-  alert("Usuário excluído");
-
-  setUsuarioSelecionado(null);
-
-  buscarPacientes();
-  buscarFuncionarios();
-}
 
   return (
     <div className={styles.page}>
@@ -437,11 +427,60 @@ function renderNomeComStatus(usuario) {
           <div className={styles.searchContainer}>
             <span className={styles.searchIcon}>🔍</span>
 
-            <input type="text"
-            className={styles.searchInput}
-            placeholder=""
-            //onChange() para implementar o backend da pesquisa
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder="Pesquisar usuário..."
+              value={pesquisa}
+              onChange={(e) =>
+                setPesquisa(e.target.value)
+              }
             />
+            {pesquisa.trim() !== "" && (
+
+              <div className={styles.resultadosPesquisa}>
+
+                {usuariosPesquisados.length > 0 ? (
+
+                  usuariosPesquisados.map((usuario) => (
+
+                    <div
+                      key={usuario.userId}
+                      className={styles.resultadoPesquisa}
+                      onClick={() => {
+
+                        selecionarUsuario(usuario);
+
+                        setPesquisa("");
+
+                      }}
+                    >
+
+                     <>
+                      {!usuario.ativo && (
+                        <strong style={{color:"red"}}>
+                          (INATIVO)
+                        </strong>
+                      )}
+                      {" "}
+                      {usuario.nomePessoa} ({usuario.tipo})
+</> 
+
+                    </div>
+
+                  ))
+
+                ) : (
+
+                  <div className={styles.resultadoPesquisa}>
+                    Nenhum usuário encontrado.
+                  </div>
+
+                )}
+
+              </div>
+
+            )}
           </div>
 
           {usuarioSelecionado && (

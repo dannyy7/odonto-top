@@ -38,6 +38,7 @@ export default function ModalAdicionarPessoa({ onClose }) {
         "http://localhost:3001/criar-usuario",
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type":
               "application/json",

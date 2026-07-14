@@ -55,6 +55,7 @@ Instale as dependências:
 npm install fastify
 npm install @supabase/supabase-js
 npm install dotenv
+npm install express-session
 ```
 
 Execute o servidor:

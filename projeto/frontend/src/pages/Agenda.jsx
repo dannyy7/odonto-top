@@ -58,8 +58,8 @@ async function buscarConsultas() {
   }
 
   function abrirConsulta(consulta) {
-  setConsultaSelecionada(consulta);
-  setModalConsulta(true);
+    setConsultaSelecionada(consulta);
+    setModalConsulta(true);
   }
 
   const nomeMes = dataAtual.toLocaleString("pt-BR", { month: "long" });

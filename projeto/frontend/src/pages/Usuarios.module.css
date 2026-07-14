@@ -174,6 +174,36 @@
 .nomeUsuario:hover {
   color: #007ea7;
 }
+/*filtro*/
+.searchContainer{
+    position: relative;
+}
+
+.resultadosPesquisa{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 5px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+.resultadoPesquisa{
+    padding: 12px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.resultadoPesquisa:hover{
+    background: #f2f2f2;
+}
+
 /* TABLET */
 @media (max-width: 768px) {
   .header {

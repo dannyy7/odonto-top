@@ -42,22 +42,6 @@ class UsuarioModel {
     return data.user;
   }
 
-
-  static async excluirUsuario(
-    userId
-  ) {
-
-    const { error } =
-      await supabaseAdmin
-      .auth
-      .admin
-      .deleteUser(userId);
-
-    if (error) {
-      throw error;
-    }
-
-  }
 }
 export default UsuarioModel;
 
