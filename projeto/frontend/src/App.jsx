@@ -19,6 +19,7 @@ import Home from "./pages/Home";
 import Tarefas from "./pages/Tarefas";
 import Usuarios from "./pages/Usuarios";
 import Agenda from "./pages/Agenda";
+import Documentos from "./pages/Documentos";
 
 function App() {
   const rota = window.location.pathname;
@@ -27,6 +28,7 @@ function App() {
   if (rota === "/tarefas") return <Tarefas />;
   if (rota === "/usuarios") return <Usuarios />;
   if (rota === "/agenda") return <Agenda />;
+  if (rota === "/modelos-documentos") return <Documentos />;
 
   return <Login />;
 }

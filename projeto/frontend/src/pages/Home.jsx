@@ -116,7 +116,7 @@ export default function Home() {
     <div className={styles.secao}>
       <div
         className={styles.card}
-        onClick={() => (window.location.href = "/usuarios")}
+        onClick={() => (window.location.href = "/modelos-documentos")}
       >
         <div className={styles.cardTop}>
           <img
