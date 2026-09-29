@@ -20,6 +20,7 @@ import Tarefas from "./pages/Tarefas";
 import Usuarios from "./pages/Usuarios";
 import Agenda from "./pages/Agenda";
 import Documentos from "./pages/Documentos";
+import Tratamentos from "./pages/Tratamentos";
 
 function App() {
   const rota = window.location.pathname;
@@ -29,6 +30,7 @@ function App() {
   if (rota === "/usuarios") return <Usuarios />;
   if (rota === "/agenda") return <Agenda />;
   if (rota === "/modelos-documentos") return <Documentos />;
+  if (rota === "/tratamentos") return <Tratamentos />;
 
   return <Login />;
 }

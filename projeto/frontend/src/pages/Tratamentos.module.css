@@ -1,0 +1,477 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+
+  background-color: #ffffff;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* ==============================
+   HEADER
+================================= */
+
+.header {
+  width: 100%;
+  height: 50px;
+
+  background-color: #51b9ed;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 18px;
+
+  color: white;
+}
+
+.tituloHeader {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.homeIcon {
+  font-size: 28px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logoDente {
+  font-size: 28px;
+}
+
+
+/* ==============================
+   CONTEÚDO
+================================= */
+
+.conteudo {
+  display: flex;
+
+  width: 100%;
+  min-height: calc(100vh - 50px);
+}
+
+
+/* ==============================
+   SIDEBAR
+================================= */
+
+.sidebar {
+  position: relative;
+
+  width: 210px;
+
+  min-height: calc(100vh - 50px);
+
+  background-color: #a5dcf5;
+
+  overflow: hidden;
+}
+
+
+/* ==============================
+   BOTÕES DE NAVEGAÇÃO
+================================= */
+
+.botoesNavegacao {
+  position: absolute;
+
+  top: 10px;
+  left: 12px;
+
+  width: 176px;
+  height: 43px;
+
+  background-color: #238fac;
+
+  border-radius: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 8px;
+
+  z-index: 10;
+}
+
+.botoesNavegacao button {
+  border: none;
+
+  cursor: pointer;
+
+  font-size: 25px;
+
+  width: 72px;
+  height: 32px;
+
+  border-radius: 20px;
+
+  background-color: white;
+}
+
+.botoesNavegacao button:first-child {
+  background-color: transparent;
+}
+
+/* ==============================
+   BOCA
+================================= */
+
+.dente {
+  position: absolute;
+
+  width: 250px;
+  height: 250px;
+
+  left: -55px;
+  bottom: 35px;
+}
+
+
+/* FUNDO ESCURO DA BOCA */
+
+.bocaFundo {
+  position: absolute;
+
+  top: 48px;
+  left: 15px;
+
+  width: 215px;
+  height: 145px;
+
+  background-color: #8e5360;
+
+  border-radius: 50%;
+}
+
+
+/* LÁBIO SUPERIOR */
+
+.labioSuperior {
+  position: absolute;
+
+  top: 25px;
+  left: 0;
+
+  width: 230px;
+  height: 105px;
+
+  background-color: #f58e90;
+
+  border-radius: 55% 45% 50% 50%;
+
+  transform: rotate(-2deg);
+
+  z-index: 2;
+}
+
+
+/* LÁBIO INFERIOR */
+
+.labioInferior {
+  position: absolute;
+
+  bottom: 20px;
+  left: 5px;
+
+  width: 225px;
+  height: 90px;
+
+  background-color: #f58e90;
+
+  border-radius: 45% 55% 55% 45%;
+
+  z-index: 2;
+}
+
+
+/* DENTES DE CIMA */
+
+.dentesSuperior {
+  position: absolute;
+
+  top: 70px;
+  left: 27px;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 2px;
+
+  z-index: 4;
+}
+
+.dentesSuperior span {
+  width: 32px;
+  height: 58px;
+
+  background-color: #fffaf0;
+
+  border: 1px solid #e5dfd0;
+
+  border-radius: 45% 45% 48% 48%;
+
+  box-sizing: border-box;
+}
+
+
+/* DENTES DE BAIXO */
+
+.dentesInferior {
+  position: absolute;
+
+  top: 128px;
+  left: 38px;
+
+  display: flex;
+  align-items: flex-end;
+
+  gap: 3px;
+
+  z-index: 4;
+}
+
+.dentesInferior span {
+  width: 31px;
+  height: 53px;
+
+  background-color: #fffaf0;
+
+  border: 1px solid #e5dfd0;
+
+  border-radius: 48% 48% 45% 45%;
+
+  box-sizing: border-box;
+}
+
+
+/* PEQUENO DETALHE ENTRE OS DENTES */
+
+.dentesSuperior span:nth-child(1),
+.dentesSuperior span:nth-child(6) {
+  height: 51px;
+  margin-top: 4px;
+}
+
+.dentesInferior span:nth-child(1),
+.dentesInferior span:nth-child(5) {
+  height: 47px;
+  margin-bottom: 3px;
+}
+
+
+/* LINHA QUE APONTA PARA O DENTE */
+
+.linhaDente {
+  position: absolute;
+
+  top: 100px;
+  right: -25px;
+
+  width: 95px;
+
+  display: flex;
+  align-items: center;
+
+  z-index: 6;
+}
+
+.linhaDente div {
+  flex: 1;
+
+  height: 2px;
+
+  background-color: #166578;
+}
+
+.linhaDente span {
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
+
+  background-color: #166578;
+
+  border-radius: 50%;
+}
+
+
+/* ==============================
+   ÁREA PRINCIPAL
+================================= */
+
+.main {
+  flex: 1;
+
+  padding: 37px 48px;
+
+  background-color: #ffffff;
+}
+
+
+/* ==============================
+   INFORMAÇÕES DO PACIENTE
+================================= */
+
+.informacoesPaciente {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  color: #27849c;
+
+  font-size: 18px;
+
+  line-height: 25px;
+
+  margin-bottom: 35px;
+}
+
+.informacoesPaciente strong {
+  font-weight: bold;
+}
+
+.contato {
+  margin-right: 120px;
+}
+
+
+/* ==============================
+   TABELA
+================================= */
+
+.tabelaContainer {
+  width: 100%;
+}
+
+.tabela {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
+
+  font-size: 16px;
+}
+
+
+/* CABEÇALHO */
+
+.tabela th {
+  height: 51px;
+
+  background-color: #c3cdf4;
+
+  border: 2px solid #9eafea;
+
+  text-align: center;
+
+  font-size: 17px;
+
+  font-weight: bold;
+
+  color: #111111;
+}
+
+
+/* CÉLULAS */
+
+.tabela td {
+  height: 50px;
+
+  border: 2px solid #a5b5ed;
+
+  background-color: white;
+
+  padding: 8px 12px;
+}
+
+
+/* LARGURA DAS COLUNAS */
+
+.tabela th:nth-child(1),
+.tabela td:nth-child(1) {
+  width: 28%;
+}
+
+.tabela th:nth-child(2),
+.tabela td:nth-child(2) {
+  width: 32%;
+}
+
+.tabela th:nth-child(3),
+.tabela td:nth-child(3) {
+  width: 40%;
+}
+
+
+/* ==============================
+   RESPONSIVIDADE
+================================= */
+
+@media (max-width: 900px) {
+
+  .sidebar {
+    width: 180px;
+  }
+
+  .main {
+    padding: 30px 25px;
+  }
+
+  .contato {
+    margin-right: 20px;
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .conteudo {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: 90px;
+    min-height: 90px;
+  }
+
+  .dente {
+    display: none;
+  }
+
+  .main {
+    padding: 25px 15px;
+  }
+
+  .informacoesPaciente {
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .contato {
+    margin-right: 0;
+  }
+}

@@ -97,7 +97,7 @@ export default function Home() {
 
       <div
         className={styles.card}
-        onClick={() => (window.location.href = "/usuarios")}
+        onClick={() => (window.location.href = "/tratamentos")}
       >
         <div className={styles.cardTop}>
           <img
@@ -111,6 +111,7 @@ export default function Home() {
           <p>Fichas de atendimentos</p>
         </div>
       </div>
+
     </div>
 
     <div className={styles.secao}>

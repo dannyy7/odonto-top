@@ -88,7 +88,6 @@ SUPABASE_URL=https://vrpoqxpqwcefhmkejfah.supabase.co
 
 SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZycG9xeHBxd2NlZmhta2VqZmFoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3Nzg0MTU3NiwiZXhwIjoyMDkzNDE3NTc2fQ.rPGWfizRgCzGBj6wD9B0H6TLlVf0yxrZY0QT2ZIgWLg
 
-
 # 4. Como executar o frontend
 
 Acesse a pasta do frontend:
