@@ -424,6 +424,172 @@
   width: 40%;
 }
 
+/* ==============================
+   BOTÃO ADICIONAR PROCEDIMENTO
+================================= */
+
+.botaoAdicionar {
+  margin-top: 15px;
+  background-color: #38c3ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.botaoAdicionar:hover {
+  background-color: #009dcc;
+}
+
+
+/* ==============================
+   BOTÕES EDITAR E EXCLUIR
+================================= */
+
+.botaoEditar,
+.botaoExcluir {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 17px;
+  padding: 3px;
+  margin: 0 3px;
+}
+
+.botaoEditar:hover,
+.botaoExcluir:hover {
+  transform: scale(1.15);
+}
+
+
+/* ==============================
+   FUNDO DO MODAL
+================================= */
+
+.fundoModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+
+/* ==============================
+   MODAL
+================================= */
+
+.modal {
+  width: 400px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 25px;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal h2 {
+  color: #009dcc;
+
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+
+/* ==============================
+   FORMULÁRIO
+================================= */
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+
+  color: #555;
+
+  font-weight: bold;
+}
+
+.modal input {
+  height: 38px;
+
+  border: 2px solid #a4e3ff;
+  border-radius: 7px;
+
+  padding: 0 10px;
+
+  outline: none;
+
+  font-size: 15px;
+}
+
+.modal input:focus {
+  border-color: #38c3ff;
+}
+
+
+/* ==============================
+   BOTÕES DO MODAL
+================================= */
+
+.botoesModal {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.botoesModal button {
+  border: none;
+
+  border-radius: 7px;
+
+  padding: 9px 18px;
+
+  cursor: pointer;
+
+  font-weight: bold;
+}
+
+.botoesModal button[type="button"] {
+  background-color: #ddd;
+  color: #555;
+}
+
+.botoesModal button[type="submit"] {
+  background-color: #38c3ff;
+  color: white;
+}
+
+.botoesModal button:hover {
+  opacity: 0.85;
+}
+
+.botoesNavegacao button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
 
 /* ==============================
    RESPONSIVIDADE
@@ -475,3 +641,5 @@
     margin-right: 0;
   }
 }
+
+
