@@ -64,18 +64,19 @@ async function buscarDentistas() {
         tipo,
         ativo
       )
-    `);
+    `)
+    .eq("idCargoFuncionario", 1);
 
-  console.log(data);
-  console.log(error);
+  console.log("DENTISTAS", data);
+  console.log("ERRO", error);
 
   if (error) return;
 
   const somenteDentistas = data.filter(
-    funcionario =>
-      funcionario.pessoa?.tipo === "Dentista" &&
-      funcionario.pessoa?.ativo === true
+    funcionario => funcionario.pessoa?.ativo === true
   );
+
+  setDentistas(somenteDentistas);
 }
 
 async function buscarProcedimentos() {
