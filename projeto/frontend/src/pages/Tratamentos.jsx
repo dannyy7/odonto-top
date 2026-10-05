@@ -3,6 +3,9 @@ import { supabase } from "../services/supabaseCliente";
 import styles from "./Tratamentos.module.css";
 import { api } from "../services/api";
 
+import casa from "../assets/icones/usuario/casa.png";
+import logo from "../assets/logos/odonto-top-branco-fundo-transparente.png";
+
 function Tratamentos({ idPaciente }) {
 
   const [paciente, setPaciente] = useState(null);
@@ -245,22 +248,24 @@ const salvarTratamento = async (e) => {
             className={styles.homeIcon}
             onClick={irParaHome}
           >
-            ⌂
+            
+            <img
+              src={casa}
+              alt="voltar"
+              className={styles.casa}
+            />
+
           </span>
 
           <span>TRATAMENTOS</span>
 
         </div>
 
-        <div className={styles.logo}>
-
-          <span className={styles.logoDente}>
-            ♢
-          </span>
-
-          <span>Odonto Top</span>
-
-        </div>
+        <img
+            src={logo}
+            alt="logo"
+            className={styles.logo}
+          />
 
       </header>
 
@@ -289,7 +294,7 @@ const salvarTratamento = async (e) => {
           {/* INFORMAÇÕES DO PACIENTE */}
           <div className={styles.informacoesPaciente}>
 
-            <div>
+            <div className={styles.dados1}>
 
               <div>
                 <strong>Paciente:</strong>{" "}
