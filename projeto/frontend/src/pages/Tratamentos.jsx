@@ -271,61 +271,13 @@ const salvarTratamento = async (e) => {
 
           <div className={styles.botoesNavegacao}>
 
-            {/* SETA PARA TRÁS — DESATIVADA */}
+            {/* VOLTA PARA TELA ANTERIOR */}
             <button
               className={styles.botaoVoltar}
-              disabled
+              onClick={() => window.history.back()}
             >
               ←
             </button>
-
-            {/* SETA PARA FRENTE — DESATIVADA */}
-            <button
-              className={styles.botaoAvancar}
-              disabled
-            >
-              →
-            </button>
-
-          </div>
-
-          {/* DESENHO DA BOCA */}
-          <div className={styles.dente}>
-
-            <div className={styles.bocaFundo}></div>
-
-            <div className={styles.labioSuperior}></div>
-
-            <div className={styles.dentesSuperior}>
-
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-
-            </div>
-
-            <div className={styles.dentesInferior}>
-
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-
-            </div>
-
-            <div className={styles.labioInferior}></div>
-
-            <div className={styles.linhaDente}>
-
-              <span></span>
-              <div></div>
-              <span></span>
-
-            </div>
 
           </div>
 
