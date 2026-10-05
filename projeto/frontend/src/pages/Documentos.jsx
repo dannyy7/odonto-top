@@ -1,9 +1,16 @@
+import { useState } from "react";
 import styles from "./Documentos.module.css";
 
 import logobranca from "../assets/logos/odonto-top-branco-fundo-transparente.png";
 import casa from "../assets/icones/usuario/casa.png";
 
+import filtro from "../assets/icones/documentos/filtro.png";
+import lapis from "../assets/icones/documentos/lapis.png";
+import lixo from "../assets/icones/documentos/lixo.png";
+
 export default function Documentos() {
+  const [maisUtilizadosVisivel, setMaisUtilizadosVisivel] = useState(true);
+
   // Mapeamento dos modelos principais com os IDs exatos que estão no Supabase
   const maisUtilizados = [
     { nome: "Consentimento", id: 4 },
@@ -71,7 +78,7 @@ export default function Documentos() {
         </div>
 
         <button className={styles.filterButton} title="Filtrar">
-          <span className={styles.filterIcon}>filtro</span>
+          <span className={styles.filterIcon}><img src={filtro} alt="filtrar" /></span>
         </button>
 
         <button className={styles.addButton} title="Adicionar modelo">
@@ -81,19 +88,27 @@ export default function Documentos() {
 
       {/* MAIS UTILIZADOS */}
       <section className={styles.sectionMostUsed}>
-        <div className={styles.sectionHeader}>
+        <button
+          type="button"
+          className={styles.sectionHeader}
+          aria-expanded={maisUtilizadosVisivel}
+          aria-controls="most-used-list"
+          onClick={() => setMaisUtilizadosVisivel((visivel) => !visivel)}
+        >
           <div className={styles.sectionTitle}>
             <span className={styles.star}>★</span>
             <span>Mais utilizados</span>
           </div>
-          <span className={styles.arrow}>⌄</span>
-        </div>
+          <span className={styles.arrow} aria-hidden="true">
+            <span className={`${styles.arrowGlyph} ${!maisUtilizadosVisivel ? styles.arrowCollapsed : ""}`}>⌄</span>
+          </span>
+        </button>
 
-        <div className={styles.mostUsedGrid}>
+        <div id="most-used-list" className={styles.mostUsedGrid} hidden={!maisUtilizadosVisivel}>
           {maisUtilizados.map((item, index) => (
             <div
               className={styles.documentItem}
-              key={index}
+              key={item.id ?? item.nome}
               onClick={() => abrirDocumento(item.id, item.nome)}
               style={{ cursor: "pointer" }}
             >
@@ -102,6 +117,26 @@ export default function Documentos() {
               </span>
               <span className={styles.documentName}>
                 {item.nome}
+              </span>
+              <span className={styles.documentActions}>
+                <button
+                  type="button"
+                  className={styles.documentActionButton}
+                  title={`Editar ${item.nome}`}
+                  aria-label={`Editar ${item.nome}`}
+                  /*onClick={}*/
+                >
+                  <img src={lapis} alt="" />
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.documentActionButton} ${styles.deleteAction}`}
+                  title={`Excluir ${item.nome}`}
+                  aria-label={`Excluir ${item.nome}`}
+                  /*onClick={}*/
+                >
+                  <img src={lixo} alt="" />
+                </button>
               </span>
             </div>
           ))}
@@ -131,6 +166,26 @@ export default function Documentos() {
               </span>
               <span className={styles.documentName}>
                 {item.nome}
+              </span>
+              <span className={styles.documentActions}>
+                <button
+                  type="button"
+                  className={styles.documentActionButton}
+                  title={`Editar ${item.nome}`}
+                  aria-label={`Editar ${item.nome}`}
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <img src={lapis} alt="" />
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.documentActionButton} ${styles.deleteAction}`}
+                  title={`Excluir ${item.nome}`}
+                  aria-label={`Excluir ${item.nome}`}
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <img src={lixo} alt="" />
+                </button>
               </span>
             </div>
           ))}

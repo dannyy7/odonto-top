@@ -195,19 +195,24 @@
 /* ============================= */
 
 .filterButton {
-  width: 30px;
-  height: 40px;
+  width: 3%;
+  height: 90%;
 
   border: none;
-  background: transparent;
-
+  border-radius: 12px;
+  background-color: #31b7ed;
+  color: white;
+  font-size: 40px;
   cursor: pointer;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 0;
+}
+
+.filterButton:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
 }
 
 
@@ -223,42 +228,12 @@
   border: none;
 }
 
-.filterIcon::before {
-  content: "";
-
-  position: absolute;
-
-  left: 1px;
-  top: 3px;
-
-  width: 19px;
-  height: 13px;
-
-  border-left: 3px solid #079ccf;
-  border-right: 3px solid #079ccf;
-
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    62% 45%,
-    62% 100%,
-    38% 100%,
-    38% 45%
-  );
-}
-
-.filterIcon::after {
-  content: "";
-
-  position: absolute;
-
-  width: 3px;
-  height: 9px;
-
-  background-color: #079ccf;
-
-  left: 9px;
-  top: 10px;
+.filterIcon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 
@@ -271,34 +246,26 @@
   height: 90%;
 
   border: none;
-
   border-radius: 12px;
-
   background-color: #31b7ed;
-
   color: white;
-
   font-size: 40px;
   font-weight: 300;
-
   cursor: pointer;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 0;
+}
+
+.addButton:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
 }
 
 .addButton span {
   transform: translateY(-2px);
 }
-
-.addButton:hover{
-     transform: scale(1.1);
-     filter: brightness(1.2);
-}
-
 
 /* ============================= */
 /* MAIS UTILIZADOS */
@@ -309,7 +276,7 @@
   width: calc(100% - 24px);
   margin: 0 12px;
   border-radius: 9px;
-  min-height: 167px;
+  min-height: 0;
   box-sizing: border-box;
   padding: 8px 20px 14px 20px;
 }
@@ -322,6 +289,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
 }
 
 
@@ -349,11 +321,33 @@
 /* SETA */
 
 .arrow {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  top: -3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.arrowGlyph {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #c9c9c9;
   font-size: 31px;
   font-weight: bold;
   line-height: 1;
-  margin-right: 4px;
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.arrowCollapsed {
+  transform: rotate(180deg);
 }
 
 
@@ -367,6 +361,10 @@
   margin-top: 5px;
 }
 
+.mostUsedGrid[hidden] {
+  display: none;
+}
+
 
 /* ============================= */
 /* ITEM DE DOCUMENTO */
@@ -375,13 +373,13 @@
 .documentItem {
   display: flex;
   align-items: center;
+  gap: 7px;
   min-width: 0;
   cursor: pointer;
 }
 
 .documentItem:hover {
-    transform: scale(1.02);
-     filter: brightness(1.2);
+  transform: scale(1.02);
 }
 
 
@@ -448,11 +446,56 @@
 /* TEXTO */
 
 .documentName {
+  flex: 1;
+  min-width: 0;
   color: #969696;
   font-size: 16px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.documentActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.documentActionButton {
+  width: 27px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: 1px solid #b6e9f7;
+  border-radius: 6px;
+  background-color: #eaf9fd;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.documentActionButton:hover {
+  border-color: #65c9e8;
+  background-color: #c9f0fb;
+}
+
+.documentActionButton img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.deleteAction {
+  border-color: #f3caca;
+  background-color: #fff1f1;
+}
+
+.deleteAction:hover {
+  border-color: #e98e8e;
+  background-color: #ffd6d6;
 }
 
 
@@ -618,6 +661,10 @@
     gap: 8px;
 
     padding: 0 10px;
+  }
+
+  .filterButton {
+    width: 45px;
   }
 
   .addButton {
