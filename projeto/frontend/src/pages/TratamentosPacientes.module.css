@@ -27,21 +27,30 @@
   font-size: 20px;
 }
 
+.casa {
+  width: clamp(40px, 6vw, 70px);
+  height: auto;
+  display: block;
+}
+
 .homeIcon {
-  font-size: 24px;
+  all: unset;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  flex-shrink: 0;
+}
+
+.homeIcon:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-
-  font-size: 20px;
-}
-
-.logo span:first-child {
-  font-size: 25px;
+  height: clamp(24px, 4vw, 36px);
+  width: auto;
+  flex-shrink: 0;
 }
 
 /* CONTEÚDO */
@@ -70,6 +79,7 @@
 
 .lupa {
   font-size: 27px;
+  padding-bottom: 8px;
   color: #2fc1ff;
 
   margin-right: 8px;
@@ -81,6 +91,8 @@
 
   width: 100%;
 
+  background-color: #fff;
+  color-scheme: light;
   font-size: 14px;
   color: #777;
 }

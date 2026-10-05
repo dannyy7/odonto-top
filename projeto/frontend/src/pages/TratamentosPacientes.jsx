@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { supabase } from "../services/supabaseCliente";
 import styles from "./TratamentosPacientes.module.css";
 
-function TratamentosPacientes() {
+import casa from "../assets/icones/usuario/casa.png";
+import logo from "../assets/logos/odonto-top-branco-fundo-transparente.png";
+
+export default function TratamentosPacientes() {
 
   const [pacientes, setPacientes] = useState([]);
   const [busca, setBusca] = useState("");
@@ -69,16 +72,22 @@ function TratamentosPacientes() {
             className={styles.homeIcon}
             onClick={voltar}
           >
-            🏠
+            <img
+              src={casa}
+              alt="voltar"
+              className={styles.casa}
+            />
+
           </span>
 
           <span>TRATAMENTOS</span>
         </div>
 
-        <div className={styles.logo}>
-          <span>♢</span>
-          <span>Odonto Top</span>
-        </div>
+        <img
+          src={logo}
+          alt="logo"
+          className={styles.logo}
+        />
 
       </header>
 
@@ -145,4 +154,3 @@ function TratamentosPacientes() {
   );
 }
 
-export default TratamentosPacientes;
