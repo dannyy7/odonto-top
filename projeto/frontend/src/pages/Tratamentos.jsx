@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../services/supabaseCliente";
 import styles from "./Tratamentos.module.css";
+import { api } from "../services/api";
 
 function Tratamentos({ idPaciente }) {
 
@@ -20,10 +21,48 @@ function Tratamentos({ idPaciente }) {
     valor: "",
   });
 
-  // BUSCAR PACIENTE
+  const carregarTratamentos = async () => {
+
+  try {
+
+    const data =
+      await api.listarTratamentos(idPaciente);
+
+    setTratamentos(data);
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
+
+  const [procedimentos, setProcedimentos] =
+useState([]);
+
+const carregarProcedimentos = async () => {
+
+  const { data, error } = await supabase
+    .from("procedimento")
+    .select("*")
+    .order("nomeProcedimento");
+
+  if (error) {
+    console.log(error);
+    return;
+  }
+
+  setProcedimentos(data);
+};
+
   useEffect(() => {
-    carregarPaciente();
-  }, [idPaciente]);
+
+  carregarPaciente();
+  carregarProcedimentos();
+  carregarTratamentos();
+
+}, [idPaciente]);
 
   const carregarPaciente = async () => {
 
@@ -33,9 +72,20 @@ function Tratamentos({ idPaciente }) {
     }
 
     const { data, error } = await supabase
-      .from("pessoa")
-      .select("*")
-      .eq("idPessoa", idPaciente)
+      .from("paciente")
+      .select(`
+        idPaciente,
+
+        pessoa:idPessoaPaciente (
+          idPessoa,
+          nomePessoa,
+          cpfPessoa,
+          telefone,
+          email,
+          endereco
+        )
+      `)
+      .eq("idPaciente", idPaciente)
       .single();
 
     if (error) {
@@ -46,7 +96,9 @@ function Tratamentos({ idPaciente }) {
 
     console.log("Paciente carregado:", data);
 
-    setPaciente(data);
+    console.log(data);
+
+    setPaciente(data.pessoa);
     setCarregando(false);
   };
 
@@ -65,77 +117,76 @@ function Tratamentos({ idPaciente }) {
   };
 
   // SALVAR PROCEDIMENTO
-  const salvarTratamento = (e) => {
+const salvarTratamento = async (e) => {
 
-    e.preventDefault();
+  e.preventDefault();
 
-    if (
-      !formulario.data ||
-      !formulario.procedimento ||
-      !formulario.valor
-    ) {
-      alert("Preencha todos os campos.");
-      return;
-    }
+  try {
 
-    // EDITAR
-    if (editando !== null) {
+    const {
+      data: { user }
+    } = await supabase.auth.getUser();
 
-      setTratamentos(
-        tratamentos.map((tratamento) =>
-          tratamento.id === editando
-            ? {
-                ...tratamento,
-                ...formulario,
-              }
-            : tratamento
-        )
+    if (editando) {
+
+      await api.editarTratamento(
+        editando,
+        {
+          data: formulario.data,
+          valor: formulario.valor,
+          idProcedimentoTratamento:
+            formulario.idProcedimento
+        }
       );
 
-    }
+    } else {
 
-    // ADICIONAR
-    else {
+      await api.criarTratamento({
+        idPacienteTratamento: Number(idPaciente),
 
-      const novoTratamento = {
-        id: Date.now(),
+        userId: user.id,
+
+        idProcedimentoTratamento:
+          formulario.idProcedimento,
+
         data: formulario.data,
-        procedimento: formulario.procedimento,
-        valor: formulario.valor,
-      };
 
-      setTratamentos([
-        ...tratamentos,
-        novoTratamento,
-      ]);
+        valor: formulario.valor
+      });
+
     }
+
+    await carregarTratamentos();
 
     setModalAberto(false);
-    setEditando(null);
 
-    setFormulario({
-      data: "",
-      procedimento: "",
-      valor: "",
-    });
-  };
+  } catch (error) {
+
+    console.log(error);
+
+    alert("Erro ao salvar");
+
+  }
+
+};
 
   // EDITAR PROCEDIMENTO
   const editarTratamento = (tratamento) => {
 
-    setEditando(tratamento.id);
+    setEditando(tratamento.idTratamento);
 
     setFormulario({
       data: tratamento.data,
-      procedimento: tratamento.procedimento,
       valor: tratamento.valor,
+      idProcedimento:
+        tratamento.procedimento.idProcedimento
     });
 
     setModalAberto(true);
   };
 
   // EXCLUIR PROCEDIMENTO
-  const excluirTratamento = (id) => {
+  const excluirTratamento = async (id) => {
 
     const confirmar = window.confirm(
       "Tem certeza que deseja excluir este procedimento?"
@@ -143,11 +194,19 @@ function Tratamentos({ idPaciente }) {
 
     if (!confirmar) return;
 
-    setTratamentos(
-      tratamentos.filter(
-        (tratamento) => tratamento.id !== id
-      )
-    );
+    try {
+
+      await api.excluirTratamento(id);
+
+      await carregarTratamentos();
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert("Erro ao excluir");
+
+    }
   };
 
   // CASINHA → VOLTAR PARA A TELA INICIAL
@@ -350,7 +409,7 @@ function Tratamentos({ idPaciente }) {
 
                   tratamentos.map((tratamento) => (
 
-                    <tr key={tratamento.id}>
+                    <tr key={tratamento.idTratamento}>
 
                       <td>
                         {new Date(
@@ -359,7 +418,7 @@ function Tratamentos({ idPaciente }) {
                       </td>
 
                       <td>
-                        {tratamento.procedimento}
+                        {tratamento.procedimento?.nomeProcedimento}
                       </td>
 
                       <td>
@@ -385,10 +444,10 @@ function Tratamentos({ idPaciente }) {
                         <button
                           className={styles.botaoExcluir}
                           onClick={() =>
-                            excluirTratamento(
-                              tratamento.id
-                            )
-                          }
+                          excluirTratamento(
+                            tratamento.idTratamento
+                          )
+                        }
                         >
                           🗑️
                         </button>
@@ -453,17 +512,32 @@ function Tratamentos({ idPaciente }) {
                 Procedimento
               </label>
 
-              <input
-                type="text"
-                placeholder="Ex.: Limpeza"
-                value={formulario.procedimento}
-                onChange={(e) =>
-                  setFormulario({
-                    ...formulario,
-                    procedimento: e.target.value,
-                  })
-                }
-              />
+              <select
+              value={formulario.idProcedimento || ""}
+              onChange={(e) =>
+                setFormulario({
+                  ...formulario,
+                  idProcedimento: Number(e.target.value)
+                })
+              }
+            >
+
+              <option value="">
+                Selecione
+              </option>
+
+              {procedimentos.map((proc) => (
+
+                <option
+                  key={proc.idProcedimento}
+                  value={proc.idProcedimento}
+                >
+                  {proc.nomeProcedimento}
+                </option>
+
+              ))}
+
+            </select>
 
               <label>
                 Valor

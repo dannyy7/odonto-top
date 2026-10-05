@@ -2,6 +2,7 @@ import express from 'express';
 import usuarioRoutes from "./routes/usuario.routes.js";
 import agendaRoutes from "./routes/agenda.routes.js"
 import dotenv from "dotenv";
+import tratamentoRoutes from "./routes/tratamento.routes.js";
 
 dotenv.config();
 
@@ -40,7 +41,8 @@ app.use(
 );
 
 app.use(usuarioRoutes);
-app.use(agendaRoutes)
+app.use(agendaRoutes);
+app.use(tratamentoRoutes);
 
 app.get("/", (req, res) => {
   res.send("Backend funcionando");
