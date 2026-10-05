@@ -1,12 +1,14 @@
 import express from 'express';
 import usuarioRoutes from "./routes/usuario.routes.js";
-import agendaRoutes from "./routes/agenda.routes.js"
+import agendaRoutes from "./routes/agenda.routes.js";
 import dotenv from "dotenv";
 import tratamentoRoutes from "./routes/tratamento.routes.js";
+import documentoRoutes from "./routes/documento.routes.js";
+import { buscarDocumentoPorId } from "./controllers/documento.controller.js";
 
 dotenv.config();
 
-const app = express()
+const app = express();
 
 // ✅ CORS
 app.use((req, res, next) => {
@@ -30,12 +32,11 @@ app.use(
     secret: "odonto-top-2026",
     resave: false,
     saveUninitialized: false,
-
     cookie: {
       httpOnly: true,
-      secure: false, // true somente quando usar HTTPS
+      secure: false,
       sameSite: "lax",
-      maxAge: 1000 * 60 * 60 * 24 // 24 horas
+      maxAge: 1000 * 60 * 60 * 24
     }
   })
 );
@@ -43,13 +44,24 @@ app.use(
 app.use(usuarioRoutes);
 app.use(agendaRoutes);
 app.use(tratamentoRoutes);
+app.use('/api/documentos', documentoRoutes);
+
+// 🚀 Rota de teste direta com log
+app.get('/api/documentos/:id', (req, res) => {
+  console.log("--> Pedido recebido na rota de documentos com o ID:", req.params.id);
+  try {
+    return buscarDocumentoPorId(req, res);
+  } catch (error) {
+    console.error("Erro ao buscar documento:", error);
+    res.status(500).send("Erro interno no servidor: " + error.message);
+  }
+});
 
 app.get("/", (req, res) => {
   res.send("Backend funcionando");
 });
 
-
-// PORTA
+// 🚀 PORTA (ESSENCIAL PARA O SERVIDOR FICAR LIGADO!)
 app.listen(3001, () => {
-  console.log('🚀 Servidor rodando em http://localhost:3001')
-})
+  console.log('🚀 Servidor rodando em http://localhost:3001');
+});
