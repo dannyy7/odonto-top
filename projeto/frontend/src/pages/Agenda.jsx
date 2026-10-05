@@ -173,7 +173,7 @@ async function buscarConsultas() {
                   value={pesquisa}
                   onChange={(e) => setPesquisa(e.target.value)}
                 />
-                <button className={styles.btnPesquisa}>🔍</button>
+                <button className={styles.btnPesquisa}>⌕</button>
               </div>
             </div>
 

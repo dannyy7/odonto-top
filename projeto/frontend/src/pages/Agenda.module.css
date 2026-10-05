@@ -182,9 +182,10 @@
 .btnPesquisa {
     background: transparent;
     border: none;
-    font-size: 18px;
+    font-size: 30px;
     cursor: pointer;
     color: #557482;
+    padding-bottom:5px;
 }
 
 .diaAtivo {

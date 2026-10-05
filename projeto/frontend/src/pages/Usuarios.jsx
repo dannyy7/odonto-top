@@ -425,7 +425,7 @@ function renderNomeComStatus(usuario) {
         <div className={styles.main}>
 
           <div className={styles.searchContainer}>
-            <span className={styles.searchIcon}>🔍</span>
+            <span className={styles.searchIcon}>⌕</span>
 
             <input
               type="text"
