@@ -13,6 +13,16 @@ dotenv.config({
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
+console.log("SUPABASE URL:", supabaseUrl);
+console.log(
+  "SERVICE ROLE EXISTE:",
+  !!supabaseServiceRoleKey
+);
+console.log(
+  "SERVICE ROLE COMEÇA COM:",
+  supabaseServiceRoleKey?.substring(0, 10)
+);  
+
 export const supabaseAdmin = createClient(
   supabaseUrl,
   supabaseServiceRoleKey
