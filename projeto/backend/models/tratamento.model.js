@@ -5,14 +5,17 @@ class TratamentoModel {
   static async listarPorPaciente(idPaciente) {
 
   console.log("ID PACIENTE:", idPaciente);
-
-  const { data, error } = await supabaseAdmin
-    .from("tratamento")
-    .select(`
-      *
-    `)
-    .eq("idPacienteTratamento", idPaciente);
-
+const { data, error } = await supabaseAdmin
+  .from("tratamento")
+  .select(`
+    *,
+    procedimento:idProcedimentoTratamento (
+      idProcedimento,
+      nomeProcedimento
+    )
+  `)
+  .eq("idPacienteTratamento", idPaciente);
+  
   console.log("DATA:", data);
   console.log("ERROR:", error);
 
@@ -21,46 +24,83 @@ class TratamentoModel {
   return data;
 }
 
- static async criar(tratamento) {
+static async criar(tratamento) {
 
   console.log("DADOS RECEBIDOS:");
   console.log(tratamento);
 
   const {
-  idPacienteTratamento,
-  userId,
-  idProcedimentoTratamento,
-  data,
-  valor
-} = tratamento;
-
-  console.log("ID PESSOA:", idPessoa);
-  console.log("USER ID:", userId);
+    idPacienteTratamento,
+    userId,
+    idProcedimentoTratamento,
+    data,
+    valor
+  } = tratamento;
 
 
+  // 1. Buscar a pessoa pelo userId
+  const { data: pessoa, error: erroPessoa } = await supabaseAdmin
+    .from("pessoa")
+    .select("idPessoa")
+    .eq("userId", userId)
+    .single();
 
-  console.log("PACIENTE:");
-  console.log(paciente);
-  console.log("ERRO PACIENTE:");
-  console.log(erroPaciente);
+  console.log("PESSOA ENCONTRADA:");
+  console.log(pessoa);
 
-  if (erroPaciente) throw erroPaciente;
+  console.log("ERRO PESSOA:");
+  console.log(erroPessoa);
 
-  const {
-    data: funcionario,
-    error: erroFuncionario
-  } = await supabaseAdmin
-    .from("funcionario")
-    .select("*");
+  if (erroPessoa) {
+    throw erroPessoa;
+  }
 
-  console.log("FUNCIONARIOS:");
+
+  // 2. Buscar o funcionário relacionado à pessoa
+  const { data: funcionario, error: erroFuncionario } =
+    await supabaseAdmin
+      .from("funcionario")
+      .select("idFuncionario")
+      .eq("idPessoaFuncionario", pessoa.idPessoa)
+      .single();
+
+  console.log("FUNCIONARIO ENCONTRADO:");
   console.log(funcionario);
+
   console.log("ERRO FUNCIONARIO:");
   console.log(erroFuncionario);
 
-  if (erroFuncionario) throw erroFuncionario;
+  if (erroFuncionario) {
+    throw erroFuncionario;
+  }
 
-  return [];
+
+  // 3. Criar o tratamento
+  const { data: novoTratamento, error } = await supabaseAdmin
+    .from("tratamento")
+    .insert([
+      {
+        idPacienteTratamento,
+        idProcedimentoTratamento,
+        idFuncionarioTratamento: funcionario.idFuncionario,
+        data,
+        valor
+      }
+    ])
+    .select()
+    .single();
+
+  console.log("NOVO TRATAMENTO:");
+  console.log(novoTratamento);
+
+  console.log("ERRO AO CRIAR:");
+  console.log(error);
+
+  if (error) {
+    throw error;
+  }
+
+  return novoTratamento;
 }
 
   static async excluir(id) {
